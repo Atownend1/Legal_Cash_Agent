@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Cash Agent - Financial Leakage Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .api-config {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .api-config h3 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .api-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .api-input input {
+            flex: 1;
+            min-width: 200px;
+            padding: 8px 12px;
+            border: 2px solid #e1e5e9;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .api-input input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #e1e5e9;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .btn-example {
+            background: #e3f2fd;
+            color: #1976d2;
+            border: 2px solid #bbdefb;
+        }
+
+        .btn-example:hover {
+            background: #bbdefb;
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .response-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .response-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .response-content {
+            white-space: pre-wrap;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #c62828;
+            margin-top: 20px;
+        }
+
+        .usage-info {
+            margin-top: 15px;
+            padding: 10px;
+            background: #e8f5e8;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #2e7d32;
+        }
+
+        .example-data {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #666;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .demo-mode {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ffc107;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .api-input {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Legal Cash Agent Pro</h1>
+            <p>Advanced Financial Leakage Analysis Tool</p>
+        </div>
+
+        <div class="api-config">
+            <h3>🔧 API Configuration</h3>
+            <div class="api-input">
+                <label for="apiEndpoint">API Endpoint:</label>
+                <input type="text" id="apiEndpoint" value="http://localhost:3000/run-agent" placeholder="Enter your API endpoint">
+                <button class="btn btn-secondary" onclick="testConnection()">Test Connection</button>
+            </div>
+            <div class="demo-mode" id="demoMode" style="display: none;">
+                <strong>Demo Mode:</strong> Using mock responses for demonstration. Set up your own backend for full functionality.
+            </div>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label for="dataInput">Paste your time/WIP data (JSON, CSV, or text):</label>
+                <textarea 
+                    id="dataInput" 
+                    placeholder="Paste your legal time entries, WIP data, or billing information here...&#10;&#10;Example formats:&#10;- JSON time entries&#10;- CSV export from your practice management system&#10;- Email threads with time data&#10;- Excel export data"
+                ></textarea>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="sendMessage()">
+                    🔍 Analyze Financial Leakage
+                </button>
+                <button class="btn btn-secondary" onclick="clearInput()">
+                    🗑️ Clear
+                </button>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-example" onclick="loadExample('time-entries')">
+                    📊 Time Entries Example
+                </button>
+                <button class="btn btn-example" onclick="loadExample('wip-data')">
+                    💼 WIP Data Example
+                </button>
+                <button class="btn btn-example" onclick="loadExample('draft-invoices')">
+                    📄 Draft Invoices Example
+                </button>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Analyzing your data for financial leakage...</p>
+        </div>
+
+        <div class="response-section" id="responseSection" style="display: none;">
+            <h3>📋 Analysis Results</h3>
+            <div class="response-content" id="responseContent"></div>
+            <div class="usage-info" id="usageInfo"></div>
+        </div>
+    </div>
+
+    <script>
+        // Demo responses for when API is not available
+        const demoResponses = {
+            'time-entries': `🕒 Missing Time:
+- Identified missing time entry for "Smith v. Johnson" on 2024-01-16
+- Sarah Wilson logged 0 hours when work was likely performed
+- Recommend follow-up to ensure accurate time recording
+
+🧾 Aged WIP:
+- No aged WIP detected in this dataset
+- All work appears to be current
+
+📄 Draft Invoices:
+- No draft invoices found in this dataset
+
+🛑 Inactive Cases with WIP:
+- No inactive matters detected
+- All cases show recent activity
+
+Token Usage: 245 total tokens (180 prompt + 65 completion)`,
+            
+            'wip-data': `🕒 Missing Time:
+- No time entries provided for analysis
+
+🧾 Aged WIP:
+- "TechCorp Acquisition": £15,000 (95 days old) - HIGH RISK
+- "Old Legacy Case": £22,000 (180 days old) - CRITICAL RISK
+- Total aged WIP: £37,000 at risk of write-off
+- Recommend immediate billing review
+
+📄 Draft Invoices:
+- No draft invoices found in this dataset
+
+🛑 Inactive Cases with WIP:
+- "Old Legacy Case" shows no recent activity
+- £22,000 unbilled time at risk
+- Recommend client contact or matter closure
+
+Token Usage: 312 total tokens (200 prompt + 112 completion)`,
+            
+            'draft-invoices': `🕒 Missing Time:
+- No time entries provided for analysis
+
+🧾 Aged WIP:
+- No aged WIP detected in this dataset
+
+📄 Draft Invoices:
+- "Corporate Restructure": £45,000 stuck in draft for 60 days
+- "Williams Divorce": £12,500 in draft for 25 days
+- Total draft value: £57,500 awaiting approval
+- Recommend expediting approval process
+
+🛑 Inactive Cases with WIP:
+- No inactive matters detected
+
+Token Usage: 298 total tokens (185 prompt + 113 completion)`
+        };
+
+        async function sendMessage() {
+            const dataInput = document.getElementById('dataInput');
+            const loading = document.getElementById('loading');
+            const responseSection = document.getElementById('responseSection');
+            const responseContent = document.getElementById('responseContent');
+            const usageInfo = document.getElementById('usageInfo');
+            const apiEndpoint = document.getElementById('apiEndpoint').value.trim();
+
+            const data = dataInput.value.trim();
+            
+            if (!data) {
+                alert('Please enter some data to analyze.');
+                return;
+            }
+
+            // Show loading
+            loading.style.display = 'block';
+            responseSection.style.display = 'none';
+
+            try {
+                // Check if we should use demo mode
+                if (!apiEndpoint || apiEndpoint === 'http://localhost:3000/run-agent') {
+                    // Use demo mode
+                    await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API delay
+                    
+                    // Determine which example was used
+                    let demoKey = 'time-entries';
+                    if (data.includes('workInProgress')) demoKey = 'wip-data';
+                    if (data.includes('draftInvoices')) demoKey = 'draft-invoices';
+                    
+                    responseContent.textContent = demoResponses[demoKey] || demoResponses['time-entries'];
+                    usageInfo.textContent = 'Demo Mode: Using mock response for demonstration';
+                    responseSection.style.display = 'block';
+                    return;
+                }
+
+                // Try real API
+                const response = await fetch(apiEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ data: data })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    responseContent.textContent = result.response;
+                    
+                    if (result.usage) {
+                        usageInfo.textContent = `Token Usage: ${result.usage.total_tokens} total tokens (${result.usage.prompt_tokens} prompt + ${result.usage.completion_tokens} completion)`;
+                    }
+                    
+                    responseSection.style.display = 'block';
+                } else {
+                    responseContent.innerHTML = `<div class="error">Error: ${result.error}</div>`;
+                    responseSection.style.display = 'block';
+                }
+            } catch (error) {
+                // Fall back to demo mode if API fails
+                console.log('API failed, using demo mode:', error.message);
+                
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                let demoKey = 'time-entries';
+                if (data.includes('workInProgress')) demoKey = 'wip-data';
+                if (data.includes('draftInvoices')) demoKey = 'draft-invoices';
+                
+                responseContent.textContent = demoResponses[demoKey] || demoResponses['time-entries'];
+                usageInfo.textContent = 'Demo Mode: API unavailable, using mock response';
+                responseSection.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        function clearInput() {
+            document.getElementById('dataInput').value = '';
+            document.getElementById('responseSection').style.display = 'none';
+        }
+
+        function loadExample(type) {
+            const examples = {
+                'time-entries': `{
+  "timeEntries": [
+    {
+      "matter": "Smith v. Johnson",
+      "feeEarner": "Sarah Wilson",
+      "date": "2024-01-15",
+      "hours": 2.5,
+      "description": "Client meeting and document review"
+    },
+    {
+      "matter": "Smith v. Johnson", 
+      "feeEarner": "Sarah Wilson",
+      "date": "2024-01-16",
+      "hours": 0,
+      "description": "No time logged"
+    },
+    {
+      "matter": "Brown Estate",
+      "feeEarner": "Mike Chen",
+      "date": "2024-01-15",
+      "hours": 1.0,
+      "description": "Phone call with executor"
+    }
+  ]
+}`,
+                'wip-data': `{
+  "workInProgress": [
+    {
+      "matter": "TechCorp Acquisition",
+      "feeEarner": "David Park",
+      "value": 15000,
+      "daysAged": 95,
+      "status": "In Progress"
+    },
+    {
+      "matter": "Jones Contract Review", 
+      "feeEarner": "Lisa Thompson",
+      "value": 8500,
+      "daysAged": 45,
+      "status": "In Progress"
+    },
+    {
+      "matter": "Old Legacy Case",
+      "feeEarner": "John Smith", 
+      "value": 22000,
+      "daysAged": 180,
+      "status": "Stalled"
+    }
+  ]
+}`,
+                'draft-invoices': `{
+  "draftInvoices": [
+    {
+      "matter": "Williams Divorce",
+      "feeEarner": "Emma Davis",
+      "value": 12500,
+      "daysInDraft": 25,
+      "lastActivity": "2024-01-10"
+    },
+    {
+      "matter": "Corporate Restructure",
+      "feeEarner": "Robert Kim",
+      "value": 45000,
+      "daysInDraft": 60,
+      "lastActivity": "2023-12-15"
+    },
+    {
+      "matter": "Property Sale",
+      "feeEarner": "Anna White",
+      "value": 8000,
+      "daysInDraft": 15,
+      "lastActivity": "2024-01-20"
+    }
+  ]
+}`
+            };
+
+            document.getElementById('dataInput').value = examples[type] || '';
+        }
+
+        async function testConnection() {
+            const apiEndpoint = document.getElementById('apiEndpoint').value.trim();
+            const demoMode = document.getElementById('demoMode');
+            
+            if (!apiEndpoint || apiEndpoint === 'http://localhost:3000/run-agent') {
+                demoMode.style.display = 'block';
+                alert('Demo mode enabled. Set up your own backend for full functionality.');
+                return;
+            }
+
+            try {
+                const response = await fetch(apiEndpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ data: 'test' })
+                });
+
+                if (response.ok) {
+                    demoMode.style.display = 'none';
+                    alert('✅ API connection successful!');
+                } else {
+                    throw new Error('API returned error status');
+                }
+            } catch (error) {
+                demoMode.style.display = 'block';
+                alert('⚠️ API connection failed. Demo mode enabled.');
+            }
+        }
+
+        // Keyboard shortcut: Ctrl+Enter to send
+        document.getElementById('dataInput').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Auto-detect if running on localhost
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            document.getElementById('demoMode').style.display = 'none';
+        } else {
+            document.getElementById('demoMode').style.display = 'block';
+        }
+    </script>
+</body>
+</html> 

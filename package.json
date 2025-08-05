@@ -1,0 +1,26 @@
+{
+  "name": "legal-cash-agent",
+  "version": "1.0.0",
+  "description": "Express.js server with OpenAI integration",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "express",
+    "openai",
+    "api",
+    "server"
+  ],
+  "author": "",
+  "license": "MIT"
+} 
