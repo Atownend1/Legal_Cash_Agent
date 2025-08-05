@@ -1,6 +1,22 @@
 [build]
   publish = "public"
-  command = "echo 'Static site deployment'"
+  command = "npm install"
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/run-agent"
+  to = "/.netlify/functions/api/run-agent"
+  status = 200
+
+[[redirects]]
+  from = "/health"
+  to = "/.netlify/functions/api/health"
+  status = 200
 
 [[redirects]]
   from = "/*"

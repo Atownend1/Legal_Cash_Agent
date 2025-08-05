@@ -287,7 +287,7 @@
             <h3>🔧 API Configuration</h3>
             <div class="api-input">
                 <label for="apiEndpoint">API Endpoint:</label>
-                <input type="text" id="apiEndpoint" value="http://localhost:3000/run-agent" placeholder="Enter your API endpoint">
+                <input type="text" id="apiEndpoint" value="" placeholder="Enter your API endpoint (optional)">
                 <button class="btn btn-secondary" onclick="testConnection()">Test Connection</button>
             </div>
             <div class="demo-mode" id="demoMode" style="display: none;">
@@ -416,8 +416,8 @@ Token Usage: 298 total tokens (185 prompt + 113 completion)`
             responseSection.style.display = 'none';
 
             try {
-                // Check if we should use demo mode
-                if (!apiEndpoint || apiEndpoint === 'http://localhost:3000/run-agent') {
+                            // Check if we should use demo mode
+            if (!apiEndpoint) {
                     // Use demo mode
                     await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API delay
                     
@@ -564,7 +564,7 @@ Token Usage: 298 total tokens (185 prompt + 113 completion)`
             const apiEndpoint = document.getElementById('apiEndpoint').value.trim();
             const demoMode = document.getElementById('demoMode');
             
-            if (!apiEndpoint || apiEndpoint === 'http://localhost:3000/run-agent') {
+            if (!apiEndpoint) {
                 demoMode.style.display = 'block';
                 alert('Demo mode enabled. Set up your own backend for full functionality.');
                 return;
