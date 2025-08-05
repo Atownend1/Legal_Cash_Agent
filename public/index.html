@@ -3,177 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yieldly - Legal Cash Agent</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Additional styles for the demo tool */
-        .demo-tool {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            margin: 2rem auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
+    <title>AI Cashflow Solutions for Legal Firms | Yieldly - Reduce Lock-up & Improve Cash Flow</title>
+    <meta name="description" content="Transform your legal firm's cash flow with AI-powered solutions. Reduce lock-up periods, accelerate payments, and improve financial efficiency for solicitors and law firms across the UK.">
+    <meta name="keywords" content="legal cashflow software, law firm accounting, AI billing solutions, solicitor cash flow management, legal finance automation">
+    <meta name="author" content="Yieldly">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://unlockcf.netlify.app/">
+    <meta property="og:title" content="AI Cashflow Solutions for Legal Firms | Yieldly">
+    <meta property="og:description" content="Transform your legal firm's cash flow with AI-powered solutions. Reduce lock-up periods and improve financial efficiency.">
+    <meta property="og:image" content="https://unlockcf.netlify.app/images/yieldly-og-image.jpg">
 
-        .api-config {
-            background: rgba(168, 85, 247, 0.1);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border-left: 4px solid #a855f7;
-        }
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://unlockcf.netlify.app/">
+    <meta property="twitter:title" content="AI Cashflow Solutions for Legal Firms | Yieldly">
+    <meta property="twitter:description" content="Transform your legal firm's cash flow with AI-powered solutions. Reduce lock-up periods and improve financial efficiency.">
+    <meta property="twitter:image" content="https://unlockcf.netlify.app/images/yieldly-twitter-image.jpg">
 
-        .input-group {
-            margin-bottom: 20px;
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://unlockcf.netlify.app/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Yieldly",
+        "description": "AI-powered cashflow solutions for legal firms",
+        "url": "https://unlockcf.netlify.app/",
+        "logo": "https://unlockcf.netlify.app/images/yieldly-logo.png",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+44-800-123-4567",
+            "contactType": "customer service",
+            "email": "hello@yieldly.ai"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Worcester",
+            "addressRegion": "Worcestershire",
+            "addressCountry": "GB"
         }
+    }
+    </script>
 
-        textarea {
-            width: 100%;
-            min-height: 200px;
-            padding: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            font-size: 14px;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            resize: vertical;
-            transition: border-color 0.3s ease;
-            background: rgba(255, 255, 255, 0.05);
-            color: #ffffff;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .btn-example {
-            background: rgba(6, 182, 212, 0.2);
-            color: #06b6d4;
-            border: 1px solid rgba(6, 182, 212, 0.3);
-        }
-
-        .btn-example:hover {
-            background: rgba(6, 182, 212, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid #a855f7;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .response-section {
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            border-left: 4px solid #a855f7;
-        }
-
-        .demo-mode {
-            background: rgba(245, 158, 11, 0.2);
-            color: #f59e0b;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #f59e0b;
-        }
-
-        /* Hide navigation for the landing page */
-        .navbar {
-            display: none;
-        }
-
-        /* Hero section adjustments */
-        .hero {
-            padding-top: 0;
-        }
-
-        .hero-content {
-            text-align: center;
-            max-width: 600px;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -2px;
-        }
-
-        .hero-content p {
-            font-size: 1.4rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-            font-weight: 400;
-            line-height: 1.6;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-content p {
-                font-size: 1.2rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
+    <!-- Google Analytics 4 - Replace GA_MEASUREMENT_ID with your actual ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">Yieldly</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/solutions">Solutions</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+            <a href="#demo" class="cta-nav">Try Demo</a>
+        </nav>
+    </header>
+
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Welcome to Yieldly.</h1>
-            <p>We work with Legal firms. We reduce lock up and cashflow delays.</p>
-            <p>We do this with AI.</p>
-            <div class="cta-buttons">
-                <a href="demo.html" class="btn btn-primary">Try Demo</a>
-                <a href="services.html" class="btn btn-secondary">Learn More</a>
+        <div class="container">
+            <h1>AI-Powered Cashflow Solutions for Legal Firms</h1>
+            <p class="subtitle">Transform your legal practice with intelligent automation that reduces lock-up periods, accelerates payments, and optimizes cash flow management for solicitors across the UK.</p>
+            <div class="hero-cta">
+                <a href="#demo" class="btn btn-primary">Try Free Demo</a>
+                <a href="/solutions" class="btn btn-secondary">Learn More</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- Features Section -->
+    <section class="features">
         <div class="container">
-            <p>&copy; 2024 Yieldly. All rights reserved.</p>
+            <div class="section-header">
+                <h2>Revolutionize Your Legal Firm's Financial Management</h2>
+                <p>Our AI-driven platform addresses the critical cash flow challenges faced by modern legal practices, from client account management to automated billing optimization.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Reduce Lock-up Periods</h3>
+                    <p>AI algorithms analyze billing patterns and client behavior to identify opportunities for faster payment collection, reducing average lock-up by up to 40%.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Intelligent Cash Flow Forecasting</h3>
+                    <p>Predict future cash flow with machine learning models that consider case types, client history, and seasonal patterns specific to legal services.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>SRA Compliant Automation</h3>
+                    <p>Ensure full compliance with SRA Accounts Rules while automating client account reconciliation, COFA reporting, and trust account management.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Seamless Integrations</h3>
+                    <p>Connect with existing legal software including Clio, Osprey, Xero, and QuickBooks for unified financial management across your practice.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Real-Time Financial Insights</h3>
+                    <p>Dashboard analytics provide instant visibility into cash flow status, outstanding invoices, and financial performance metrics tailored for legal firms.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Advanced Security & Privacy</h3>
+                    <p>Bank-level encryption and GDPR compliance ensure your client data and financial information remain secure and confidential at all times.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <div class="benefits-content">
+                <div class="benefits-text">
+                    <h2>Why Leading Legal Firms Choose Yieldly</h2>
+                    <div class="benefit-item">
+                        <h3>Improve Cash Flow by 35-50%</h3>
+                        <p>Our AI identifies payment bottlenecks and automates follow-up processes, significantly reducing the time between work completion and payment receipt.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h3>Save 15+ Hours Weekly</h3>
+                        <p>Automate routine financial tasks including invoice generation, payment reminders, and account reconciliation, freeing your team to focus on billable work.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <h3>Reduce Administrative Costs</h3>
+                        <p>Streamline back-office operations with intelligent automation that handles repetitive tasks while maintaining full audit trails for compliance.</p>
+                    </div>
+                </div>
+                <div class="benefits-stats">
+                    <div class="stat">
+                        <div class="stat-number">40%</div>
+                        <div class="stat-label">Faster Payment Collection</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">£150k+</div>
+                        <div class="stat-label">Average Annual Savings</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Client Satisfaction Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="demo">
+        <div class="container">
+            <h2>Ready to Transform Your Legal Firm's Cash Flow?</h2>
+            <p>Join hundreds of UK legal firms already using Yieldly to optimize their financial operations and improve cash flow management.</p>
+            <div class="cta-buttons">
+                <a href="/contact" class="btn btn-primary btn-large">Schedule Free Consultation</a>
+                <a href="#" class="btn btn-secondary btn-large">Download Case Study</a>
+            </div>
+            <p class="cta-note">No setup fees • 30-day free trial • Full SRA compliance support</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Yieldly</h3>
+                    <p>AI-powered cashflow solutions designed specifically for UK legal firms.</p>
+                    <div class="contact-info">
+                        <p>📧 hello@yieldly.ai</p>
+                        <p>📞 +44 800 123 4567</p>
+                        <p>📍 Worcester, Worcestershire</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="/solutions#cashflow">Cash Flow Management</a></li>
+                        <li><a href="/solutions#billing">AI Billing Optimization</a></li>
+                        <li><a href="/solutions#compliance">SRA Compliance</a></li>
+                        <li><a href="/solutions#integrations">Software Integrations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#blog">Legal Finance Blog</a></li>
+                        <li><a href="#case-studies">Case Studies</a></li>
+                        <li><a href="#support">Help Center</a></li>
+                        <li><a href="#api">API Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Yieldly. All rights reserved. | Designed for UK Legal Firms</p>
+            </div>
         </div>
     </footer>
 </body>

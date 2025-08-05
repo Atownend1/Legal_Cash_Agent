@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://unlockcf.netlify.app/sitemap.xml
+
+# Block common non-content areas
+Disallow: /css/
+Disallow: /js/
+Disallow: /images/
+Disallow: /_redirects
+Disallow: /.netlify/
+
+# Allow important files
+Allow: /favicon.ico
+Allow: /apple-touch-icon.png 
