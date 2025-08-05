@@ -1,9 +1,9 @@
 # Netlify redirects file
 # Redirect HTTP to HTTPS
-http://unlockcf.netlify.app/* https://unlockcf.netlify.app/:splat 301!
+http://www.yieldlycf.com/* https://www.yieldlycf.com/:splat 301!
 
-# Redirect www to non-www (if you get a custom domain)
-# https://www.yourdomain.com/* https://yourdomain.com/:splat 301!
+# Redirect non-www to www
+https://yieldlycf.com/* https://www.yieldlycf.com/:splat 301!
 
 # SPA fallback for 404s
 /* /index.html 200 

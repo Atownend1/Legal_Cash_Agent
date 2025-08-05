@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://unlockcf.netlify.app/sitemap.xml
+Sitemap: https://www.yieldlycf.com/sitemap.xml
 
 # Block common non-content areas
 Disallow: /css/
