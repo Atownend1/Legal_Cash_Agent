@@ -341,9 +341,11 @@
             btnLoading.style.display = 'inline';
             submitBtn.disabled = true;
             
-            // Send data to backend API
+            // Send data to Zapier webhook (replace YOUR_ZAPIER_WEBHOOK_URL)
             try {
-                const response = await fetch('/.netlify/functions/api/demo-submit', {
+                const zapierWebhookUrl = 'YOUR_ZAPIER_WEBHOOK_URL'; // Replace with your Zapier webhook URL
+                
+                const response = await fetch(zapierWebhookUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -352,22 +354,19 @@
                         name: name,
                         email: email,
                         company: company,
-                        files: [] // Will be populated when files are uploaded
+                        source: 'demo-form',
+                        timestamp: new Date().toISOString()
                     })
                 });
 
-                const result = await response.json();
-                
-                if (result.success) {
+                // Zapier always returns 200 if webhook is received
+                if (response.ok) {
                     // Store user info
                     localStorage.setItem('demoUser', JSON.stringify({
                         name: name,
                         email: email,
                         company: company
                     }));
-                    
-                    // Store analysis results
-                    localStorage.setItem('demoAnalysis', result.analysis);
                     
                     // Show success message
                     alert('Demo access granted! Check your email for personalised insights.');
@@ -376,7 +375,7 @@
                     document.getElementById('demoModal').style.display = 'block';
                     document.body.style.overflow = 'hidden';
                 } else {
-                    alert('Error: ' + result.error);
+                    alert('Error submitting demo request. Please try again.');
                 }
                 
                 // Reset form
