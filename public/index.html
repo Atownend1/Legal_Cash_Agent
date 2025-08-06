@@ -341,58 +341,28 @@
             btnLoading.style.display = 'inline';
             submitBtn.disabled = true;
             
-            // Send data to Zapier webhook (replace YOUR_ZAPIER_WEBHOOK_URL)
-            try {
-                const zapierWebhookUrl = 'YOUR_ZAPIER_WEBHOOK_URL'; // Replace with your Zapier webhook URL
+            // Simulate demo submission (in production, this would send to Zapier webhook)
+            setTimeout(() => {
+                // Store user info
+                localStorage.setItem('demoUser', JSON.stringify({
+                    name: name,
+                    email: email,
+                    company: company
+                }));
                 
-                const response = await fetch(zapierWebhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name: name,
-                        email: email,
-                        company: company,
-                        source: 'demo-form',
-                        timestamp: new Date().toISOString()
-                    })
-                });
-
-                // Zapier always returns 200 if webhook is received
-                if (response.ok) {
-                    // Store user info
-                    localStorage.setItem('demoUser', JSON.stringify({
-                        name: name,
-                        email: email,
-                        company: company
-                    }));
-                    
-                    // Show success message
-                    alert('Demo access granted! Check your email for personalised insights.');
-                    
-                    // Show demo modal
-                    document.getElementById('demoModal').style.display = 'block';
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    alert('Error submitting demo request. Please try again.');
-                }
+                // Show success message
+                alert('Demo access granted! Check your email for personalised insights.');
+                
+                // Show demo modal
+                document.getElementById('demoModal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
                 
                 // Reset form
                 btnText.style.display = 'inline';
                 btnLoading.style.display = 'none';
                 submitBtn.disabled = false;
                 document.getElementById('demoForm').reset();
-                
-            } catch (error) {
-                console.error('Demo submission error:', error);
-                alert('Error submitting demo request. Please try again.');
-                
-                // Reset form
-                btnText.style.display = 'inline';
-                btnLoading.style.display = 'none';
-                submitBtn.disabled = false;
-            }
+            }, 1500);
         });
         
         // File upload handling
