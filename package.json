@@ -6,7 +6,10 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "npm install && cd netlify/functions && npm install"
+    "build": "npm install && cd netlify/functions && npm install",
+    "performance:test": "node performance-tracking/performance-monitor.js",
+    "performance:monitor": "node performance-tracking/performance-monitor.js --schedule 24",
+    "performance:dashboard": "npm run dev & open http://localhost:3000/performance-dashboard"
   },
   "dependencies": {
     "express": "^4.18.2",
