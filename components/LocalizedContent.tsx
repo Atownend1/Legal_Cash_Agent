@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { marked } from 'marked';
 import masterConfig from '../config/master.config.js';
 
 interface LocalizedContentProps {
-  regionCode: string;
-  contentType: 'hero' | 'benefits' | 'testimonials' | 'services' | 'contact';
+  region: string;
+  contentType: 'hero' | 'features' | 'benefits' | 'testimonials' | 'services' | 'contact' | 'pricing' | 'compliance';
   fallbackContent?: any;
   className?: string;
+  language?: string;
+  city?: string;
+  service?: string;
 }
 
 interface RegionContent {
@@ -53,10 +57,13 @@ interface RegionContent {
 }
 
 const LocalizedContent: React.FC<LocalizedContentProps> = ({
-  regionCode,
+  region,
   contentType,
   fallbackContent,
-  className = ''
+  className = '',
+  language,
+  city,
+  service
 }) => {
   const [content, setContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import masterConfig from '../config/master.config.js';
 
 interface Region {
@@ -9,22 +10,33 @@ interface Region {
   language: string;
   isActive: boolean;
   isPrimary: boolean;
+  cities?: string[];
+  services?: string[];
+  pricing?: {
+    starting: number;
+    currency: string;
+  };
 }
 
 interface RegionSelectorProps {
-  onRegionChange: (region: Region) => void;
+  onRegionChange?: (region: Region) => void;
   currentRegion?: string;
   className?: string;
+  showPricing?: boolean;
+  showLanguage?: boolean;
 }
 
 const RegionSelector: React.FC<RegionSelectorProps> = ({
   onRegionChange,
   currentRegion = 'midlands',
-  className = ''
+  className = '',
+  showPricing = false,
+  showLanguage = false
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState<Region | null>(null);
   const [regions, setRegions] = useState<Region[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     // Load regions from master config
@@ -52,7 +64,23 @@ const RegionSelector: React.FC<RegionSelectorProps> = ({
   const handleRegionSelect = (region: Region) => {
     setSelectedRegion(region);
     setIsOpen(false);
-    onRegionChange(region);
+    
+    // Call optional callback
+    if (onRegionChange) {
+      onRegionChange(region);
+    }
+    
+    // Navigate to region-specific page
+    const currentPath = router.asPath;
+    const pathParts = currentPath.split('/').filter(Boolean);
+    
+    // Replace region in URL if it exists, otherwise navigate to region home
+    if (pathParts.length > 0 && Object.values(masterConfig.global.regions).some((r: any) => r.code === pathParts[0])) {
+      pathParts[0] = region.code;
+      router.push(`/${pathParts.join('/')}`);
+    } else {
+      router.push(`/${region.code}`);
+    }
   };
 
   const getFlagEmoji = (country: string) => {
