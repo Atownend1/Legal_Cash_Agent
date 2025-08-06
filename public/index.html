@@ -178,18 +178,97 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section" id="demo">
+    <!-- Demo Section -->
+    <section class="demo-section" id="demo">
         <div class="container">
-            <h2>Ready to Transform Your Legal Firm's Cash Flow?</h2>
-            <p>Join hundreds of UK legal firms already using Yieldly to optimise their financial operations and improve cash flow management.</p>
-            <div class="cta-buttons">
-                <a href="/contact" class="btn btn-primary btn-large">Schedule Free Consultation</a>
-                <a href="#" class="btn btn-secondary btn-large">Download Case Study</a>
+            <div class="demo-content">
+                <div class="demo-text">
+                    <h2>Experience Yieldly in Action</h2>
+                    <p>Try our AI-powered cash flow analysis tool. Simply upload your financial data and see how our intelligent system identifies opportunities to improve your firm's cash flow.</p>
+                    <div class="demo-features">
+                        <div class="demo-feature">
+                            <span class="demo-icon">🔍</span>
+                            <span>Instant AI Analysis</span>
+                        </div>
+                        <div class="demo-feature">
+                            <span class="demo-icon">📊</span>
+                            <span>Detailed Reports</span>
+                        </div>
+                        <div class="demo-feature">
+                            <span class="demo-icon">⚡</span>
+                            <span>Real-time Results</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="demo-form-container">
+                    <div class="demo-form-card">
+                        <h3>Access Your Free Demo</h3>
+                        <p>Enter your details to unlock the demo and receive personalised insights for your legal firm.</p>
+                        
+                        <form id="demoForm" class="demo-form">
+                            <div class="form-group">
+                                <label for="demoName">Full Name *</label>
+                                <input type="text" id="demoName" name="name" required placeholder="Enter your full name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="demoEmail">Email Address *</label>
+                                <input type="email" id="demoEmail" name="email" required placeholder="Enter your email address">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="demoCompany">Company Name</label>
+                                <input type="text" id="demoCompany" name="company" placeholder="Your law firm name">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-large demo-submit">
+                                <span class="btn-text">Access Demo</span>
+                                <span class="btn-loading" style="display: none;">Processing...</span>
+                            </button>
+                        </form>
+                        
+                        <div class="demo-note">
+                            <p>🔒 Your data is secure and will only be used for demo purposes</p>
+                            <p>📧 You'll receive a personalised report via email</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="cta-note">No setup fees • 30-day free trial • Full SRA compliance support</p>
         </div>
     </section>
+
+    <!-- Demo Modal -->
+    <div id="demoModal" class="demo-modal">
+        <div class="demo-modal-content">
+            <div class="demo-modal-header">
+                <h2>Yieldly AI Cash Flow Analysis</h2>
+                <button class="demo-modal-close" onclick="closeDemoModal()">&times;</button>
+            </div>
+            <div class="demo-modal-body">
+                <div class="demo-upload-section">
+                    <h3>Upload Your Financial Data</h3>
+                    <p>For the best analysis, please upload your firm's financial data (CSV, Excel, or PDF format).</p>
+                    
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <p>Drag and drop files here or click to browse</p>
+                        <input type="file" id="fileInput" accept=".csv,.xlsx,.xls,.pdf" multiple>
+                    </div>
+                    
+                    <div class="uploaded-files" id="uploadedFiles"></div>
+                </div>
+                
+                <div class="demo-analysis-section" id="analysisSection" style="display: none;">
+                    <h3>AI Analysis Results</h3>
+                    <div class="analysis-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Analysing your financial data...</p>
+                    </div>
+                    <div class="analysis-results" id="analysisResults"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -237,5 +316,170 @@
             </div>
         </div>
     </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Demo form handling
+        document.getElementById('demoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('demoName').value;
+            const email = document.getElementById('demoEmail').value;
+            const company = document.getElementById('demoCompany').value;
+            
+            if (!name || !email) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = document.querySelector('.demo-submit');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+            
+            // Simulate processing
+            setTimeout(() => {
+                // Store user info (in real app, this would be sent to server)
+                localStorage.setItem('demoUser', JSON.stringify({
+                    name: name,
+                    email: email,
+                    company: company
+                }));
+                
+                // Show demo modal
+                document.getElementById('demoModal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                // Reset form
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+                document.getElementById('demoForm').reset();
+            }, 1500);
+        });
+        
+        // File upload handling
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadedFiles = document.getElementById('uploadedFiles');
+        
+        uploadArea.addEventListener('click', () => fileInput.click());
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#60a5fa';
+            uploadArea.style.background = 'rgba(96, 165, 250, 0.1)';
+        });
+        
+        uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'rgba(96, 165, 250, 0.3)';
+            uploadArea.style.background = 'transparent';
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'rgba(96, 165, 250, 0.3)';
+            uploadArea.style.background = 'transparent';
+            
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+        
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                const fileElement = document.createElement('div');
+                fileElement.className = 'uploaded-file';
+                fileElement.innerHTML = `
+                    <span class="uploaded-file-name">${file.name}</span>
+                    <span class="uploaded-file-size">${formatFileSize(file.size)}</span>
+                `;
+                uploadedFiles.appendChild(fileElement);
+            });
+            
+            // Show analysis section after files are uploaded
+            setTimeout(() => {
+                document.getElementById('analysisSection').style.display = 'block';
+                startAnalysis();
+            }, 1000);
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        function startAnalysis() {
+            const analysisResults = document.getElementById('analysisResults');
+            const loadingSection = document.querySelector('.analysis-loading');
+            
+            // Simulate AI analysis
+            setTimeout(() => {
+                loadingSection.style.display = 'none';
+                analysisResults.innerHTML = `
+                    <div style="color: #ffffff; margin-bottom: 1rem;">
+                        <h4 style="color: #60a5fa; margin-bottom: 0.5rem;">AI Analysis Complete</h4>
+                        <p style="color: #94a3b8; line-height: 1.6;">
+                            Based on your financial data, here are the key insights and recommendations:
+                        </p>
+                    </div>
+                    <div style="background: rgba(96, 165, 250, 0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                        <h5 style="color: #60a5fa; margin-bottom: 0.5rem;">Cash Flow Opportunities</h5>
+                        <ul style="color: #94a3b8; margin: 0; padding-left: 1.5rem;">
+                            <li>Potential 35% improvement in payment collection speed</li>
+                            <li>£45,000+ in recoverable outstanding invoices</li>
+                            <li>15 hours weekly time savings through automation</li>
+                        </ul>
+                    </div>
+                    <div style="background: rgba(96, 165, 250, 0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                        <h5 style="color: #60a5fa; margin-bottom: 0.5rem;">Recommended Actions</h5>
+                        <ul style="color: #94a3b8; margin: 0; padding-left: 1.5rem;">
+                            <li>Implement automated payment reminders</li>
+                            <li>Optimise billing cycle timing</li>
+                            <li>Set up recurring invoice generation</li>
+                        </ul>
+                    </div>
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button onclick="scheduleConsultation()" style="background: linear-gradient(135deg, #60a5fa, #3b82f6); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-weight: 600; cursor: pointer;">
+                            Schedule Free Consultation
+                        </button>
+                    </div>
+                `;
+            }, 3000);
+        }
+        
+        function closeDemoModal() {
+            document.getElementById('demoModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Clear uploaded files
+            uploadedFiles.innerHTML = '';
+            document.getElementById('analysisSection').style.display = 'none';
+            document.querySelector('.analysis-loading').style.display = 'block';
+        }
+        
+        function scheduleConsultation() {
+            alert('Thank you! A member of our team will contact you within 24 hours to schedule your free consultation.');
+            closeDemoModal();
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('demoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDemoModal();
+            }
+        });
+    </script>
 </body>
 </html> 
