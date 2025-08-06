@@ -61,16 +61,32 @@
     }
     </script>
 
-    <!-- Google Analytics 4 - Replace GA_MEASUREMENT_ID with your actual ID -->
-    <!-- Get your GA4 ID from: https://analytics.google.com/ -->
-    <!-- Example: G-XXXXXXXXXX -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T2TK89R2R7"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
+        gtag('config', 'G-T2TK89R2R7', {
+            // Enhanced regional tracking
+            custom_map: {
+                'custom_parameter_1': 'region',
+                'custom_parameter_2': 'city',
+                'custom_parameter_3': 'language',
+                'custom_parameter_4': 'currency'
+            }
+        });
+        
+        // Track regional page views
+        gtag('event', 'page_view', {
+            'custom_parameter_1': 'midlands', // Default region
+            'custom_parameter_3': 'en-GB',   // Default language
+            'custom_parameter_4': 'GBP'      // Default currency
+        });
     </script>
+    
+    <!-- Enhanced Analytics Tracking -->
+    <script src="js/analytics.js"></script>
 </head>
 <body>
     <!-- Header -->
