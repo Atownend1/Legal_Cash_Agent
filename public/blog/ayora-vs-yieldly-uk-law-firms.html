@@ -770,6 +770,25 @@
                     </div>
                 </section>
 
+                <!-- Related Articles -->
+                <section class="related-articles">
+                    <h2>Continue Reading</h2>
+                    <div class="related-grid">
+                        <div class="related-card">
+                            <h3><a href="top-5-ayora-alternatives-uk-solicitors.html">Top 5 Ayora.ai Alternatives</a></h3>
+                            <p>Comprehensive guide to the best Ayora.ai alternatives for UK solicitors, including detailed pricing and feature comparisons.</p>
+                        </div>
+                        <div class="related-card">
+                            <h3><a href="hidden-costs-enterprise-legal-ai.html">Hidden Costs of Enterprise Legal AI</a></h3>
+                            <p>Uncover the true cost of enterprise legal AI platforms and learn why transparent pricing matters for UK firms.</p>
+                        </div>
+                        <div class="related-card">
+                            <h3><a href="ayora-to-yieldly-migration-guide.html">Migration Guide: Ayora to Yieldly</a></h3>
+                            <p>Complete step-by-step guide for UK firms switching from Ayora.ai to Yieldly, including timeline and cost savings.</p>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- CTA Section -->
                 <section class="article-cta">
                     <div class="cta-content">
@@ -1397,6 +1416,53 @@
             margin-top: 2rem;
         }
 
+        /* Related Articles */
+        .related-articles {
+            background: rgba(96, 165, 250, 0.1);
+            padding: 3rem;
+            border-radius: 12px;
+            margin: 4rem 0;
+        }
+
+        .related-articles h2 {
+            color: #60a5fa;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .related-card {
+            background: rgba(96, 165, 250, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #60a5fa;
+        }
+
+        .related-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        .related-card h3 a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .related-card h3 a:hover {
+            color: #10b981;
+        }
+
+        .related-card p {
+            color: #94a3b8;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .article-header h1 {
@@ -1424,6 +1490,10 @@
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
