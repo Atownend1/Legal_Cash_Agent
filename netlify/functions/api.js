@@ -273,6 +273,91 @@ exports.handler = async (event, context) => {
             }
         }
 
+        // Demo submission endpoint
+        if (path === '/demo-submit' && event.httpMethod === 'POST') {
+            try {
+                const { name, email, company, files } = JSON.parse(event.body);
+                
+                if (!name || !email) {
+                    return {
+                        statusCode: 400,
+                        headers,
+                        body: JSON.stringify({
+                            success: false,
+                            error: 'Name and email are required'
+                        })
+                    };
+                }
+
+                // Generate demo analysis
+                const demoData = `Demo Analysis for ${name} (${email})
+Company: ${company || 'Not specified'}
+
+Sample financial data for demonstration:
+- Outstanding invoices: £45,000
+- Aged WIP: £37,000
+- Average payment time: 45 days
+- Monthly billing: £125,000`;
+
+                const analysis = await analyzeWithOpenAI(createAnalysisPrompt(demoData));
+
+                // Send email (in production, integrate with email service)
+                const emailContent = `
+Dear ${name},
+
+Thank you for trying Yieldly's AI Cash Flow Analysis Demo!
+
+Here are your personalised insights:
+
+${analysis.response}
+
+Key Recommendations:
+- Implement automated payment reminders
+- Review aged WIP within 30 days
+- Optimise billing cycle timing
+- Set up recurring invoice generation
+
+Next Steps:
+1. Schedule a free consultation to discuss your specific needs
+2. Get a custom implementation plan for your firm
+3. Start your 30-day free trial
+
+Contact us:
+📧 hello@yieldly.ai
+📞 +44 800 123 4567
+
+Best regards,
+The Yieldly Team
+                `;
+
+                // In production, send actual email here
+                console.log('Email would be sent to:', email);
+                console.log('Email content:', emailContent);
+
+                return {
+                    statusCode: 200,
+                    headers,
+                    body: JSON.stringify({
+                        success: true,
+                        message: 'Demo analysis completed and email sent',
+                        analysis: analysis.response,
+                        emailSent: true
+                    })
+                };
+
+            } catch (error) {
+                console.error('Demo submission error:', error);
+                return {
+                    statusCode: 500,
+                    headers,
+                    body: JSON.stringify({
+                        success: false,
+                        error: 'Failed to process demo submission'
+                    })
+                };
+            }
+        }
+
         // Default response for unknown endpoints
         return {
             statusCode: 404,
@@ -282,6 +367,7 @@ exports.handler = async (event, context) => {
                 availableEndpoints: [
                     'GET /health',
                     'POST /run-agent',
+                    'POST /demo-submit',
                     'GET /v1/cash/balance',
                     'POST /v1/cash/transaction',
                     'GET /v1/expenses',

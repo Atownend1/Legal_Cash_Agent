@@ -341,25 +341,59 @@
             btnLoading.style.display = 'inline';
             submitBtn.disabled = true;
             
-            // Simulate processing
-            setTimeout(() => {
-                // Store user info (in real app, this would be sent to server)
-                localStorage.setItem('demoUser', JSON.stringify({
-                    name: name,
-                    email: email,
-                    company: company
-                }));
+            // Send data to backend API
+            try {
+                const response = await fetch('/.netlify/functions/api/demo-submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        company: company,
+                        files: [] // Will be populated when files are uploaded
+                    })
+                });
+
+                const result = await response.json();
                 
-                // Show demo modal
-                document.getElementById('demoModal').style.display = 'block';
-                document.body.style.overflow = 'hidden';
+                if (result.success) {
+                    // Store user info
+                    localStorage.setItem('demoUser', JSON.stringify({
+                        name: name,
+                        email: email,
+                        company: company
+                    }));
+                    
+                    // Store analysis results
+                    localStorage.setItem('demoAnalysis', result.analysis);
+                    
+                    // Show success message
+                    alert('Demo access granted! Check your email for personalised insights.');
+                    
+                    // Show demo modal
+                    document.getElementById('demoModal').style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    alert('Error: ' + result.error);
+                }
                 
                 // Reset form
                 btnText.style.display = 'inline';
                 btnLoading.style.display = 'none';
                 submitBtn.disabled = false;
                 document.getElementById('demoForm').reset();
-            }, 1500);
+                
+            } catch (error) {
+                console.error('Demo submission error:', error);
+                alert('Error submitting demo request. Please try again.');
+                
+                // Reset form
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
         });
         
         // File upload handling
@@ -424,38 +458,70 @@
             const analysisResults = document.getElementById('analysisResults');
             const loadingSection = document.querySelector('.analysis-loading');
             
-            // Simulate AI analysis
+            // Get stored analysis from API
+            const storedAnalysis = localStorage.getItem('demoAnalysis');
+            
             setTimeout(() => {
                 loadingSection.style.display = 'none';
-                analysisResults.innerHTML = `
-                    <div style="color: #ffffff; margin-bottom: 1rem;">
-                        <h4 style="color: #60a5fa; margin-bottom: 0.5rem;">AI Analysis Complete</h4>
-                        <p style="color: #94a3b8; line-height: 1.6;">
-                            Based on your financial data, here are the key insights and recommendations:
-                        </p>
-                    </div>
-                    <div style="background: rgba(96, 165, 250, 0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <h5 style="color: #60a5fa; margin-bottom: 0.5rem;">Cash Flow Opportunities</h5>
-                        <ul style="color: #94a3b8; margin: 0; padding-left: 1.5rem;">
-                            <li>Potential 35% improvement in payment collection speed</li>
-                            <li>£45,000+ in recoverable outstanding invoices</li>
-                            <li>15 hours weekly time savings through automation</li>
-                        </ul>
-                    </div>
-                    <div style="background: rgba(96, 165, 250, 0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                        <h5 style="color: #60a5fa; margin-bottom: 0.5rem;">Recommended Actions</h5>
-                        <ul style="color: #94a3b8; margin: 0; padding-left: 1.5rem;">
-                            <li>Implement automated payment reminders</li>
-                            <li>Optimise billing cycle timing</li>
-                            <li>Set up recurring invoice generation</li>
-                        </ul>
-                    </div>
-                    <div style="text-align: center; margin-top: 2rem;">
-                        <button onclick="scheduleConsultation()" style="background: linear-gradient(135deg, #60a5fa, #3b82f6); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-weight: 600; cursor: pointer;">
-                            Schedule Free Consultation
-                        </button>
-                    </div>
-                `;
+                
+                if (storedAnalysis) {
+                    // Use real analysis from API
+                    analysisResults.innerHTML = `
+                        <div style="color: #ffffff; margin-bottom: 1rem;">
+                            <h4 style="color: #60a5fa; margin-bottom: 0.5rem;">AI Analysis Complete</h4>
+                            <p style="color: #94a3b8; line-height: 1.6;">
+                                Based on your financial data, here are your personalised insights:
+                            </p>
+                        </div>
+                        <div style="background: rgba(96, 165, 250, 0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                            <pre style="color: #94a3b8; white-space: pre-wrap; font-family: inherit; margin: 0; line-height: 1.6;">${storedAnalysis}</pre>
+                        </div>
+                        <div style="background: rgba(96, 165, 250, 0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                            <h5 style="color: #60a5fa; margin-bottom: 0.5rem;">Next Steps</h5>
+                            <ul style="color: #94a3b8; margin: 0; padding-left: 1.5rem;">
+                                <li>Check your email for detailed insights</li>
+                                <li>Schedule a free consultation</li>
+                                <li>Start your 30-day free trial</li>
+                            </ul>
+                        </div>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button onclick="scheduleConsultation()" style="background: linear-gradient(135deg, #60a5fa, #3b82f6); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-weight: 600; cursor: pointer;">
+                                Schedule Free Consultation
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    // Fallback to demo analysis
+                    analysisResults.innerHTML = `
+                        <div style="color: #ffffff; margin-bottom: 1rem;">
+                            <h4 style="color: #60a5fa; margin-bottom: 0.5rem;">AI Analysis Complete</h4>
+                            <p style="color: #94a3b8; line-height: 1.6;">
+                                Based on your financial data, here are the key insights and recommendations:
+                            </p>
+                        </div>
+                        <div style="background: rgba(96, 165, 250, 0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                            <h5 style="color: #60a5fa; margin-bottom: 0.5rem;">Cash Flow Opportunities</h5>
+                            <ul style="color: #94a3b8; margin: 0; padding-left: 1.5rem;">
+                                <li>Potential 35% improvement in payment collection speed</li>
+                                <li>£45,000+ in recoverable outstanding invoices</li>
+                                <li>15 hours weekly time savings through automation</li>
+                            </ul>
+                        </div>
+                        <div style="background: rgba(96, 165, 250, 0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                            <h5 style="color: #60a5fa; margin-bottom: 0.5rem;">Recommended Actions</h5>
+                            <ul style="color: #94a3b8; margin: 0; padding-left: 1.5rem;">
+                                <li>Implement automated payment reminders</li>
+                                <li>Optimise billing cycle timing</li>
+                                <li>Set up recurring invoice generation</li>
+                            </ul>
+                        </div>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button onclick="scheduleConsultation()" style="background: linear-gradient(135deg, #60a5fa, #3b82f6); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-weight: 600; cursor: pointer;">
+                                Schedule Free Consultation
+                            </button>
+                        </div>
+                    `;
+                }
             }, 3000);
         }
         
