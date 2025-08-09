@@ -3,232 +3,572 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Yieldly | AI Cashflow Solutions for Legal Firms</title>
-    <meta name="description" content="Get in touch with Yieldly for AI-powered cashflow solutions. Schedule a consultation or request a demo for your legal firm.">
-    <link rel="stylesheet" href="css/styles.css">
-    
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T2TK89R2R7"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-T2TK89R2R7', {
-            custom_map: {
-                'custom_parameter_1': 'region',
-                'custom_parameter_2': 'city',
-                'custom_parameter_3': 'language',
-                'custom_parameter_4': 'currency'
-            }
-        });
-        
-        gtag('event', 'page_view', {
-            'custom_parameter_1': 'midlands',
-            'custom_parameter_3': 'en-GB',
-            'custom_parameter_4': 'GBP'
-        });
-    </script>
+    <title>Contact - YieldlyCF | Book Your Legal Finance Review</title>
+    <meta name="description" content="Schedule a 20-minute review with our legal finance experts. Transform your firm's cash flow and reduce lock-up periods by 45%.">
     
     <style>
-        .contact-form {
-            background: white;
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            max-width: 600px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: #fff;
+            color: #000;
+            cursor: default;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 3rem;
         }
-        
+
+        /* Header - Same as homepage */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6rem;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            color: #000;
+            display: inline-block;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .status {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-link {
+            font-size: 0.9rem;
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid #000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cta-link:hover {
+            padding-bottom: 3px;
+        }
+
+        /* Main Layout */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            margin-top: 2rem;
+        }
+
+        /* Left Column - Contact Info */
+        .contact-info {
+            padding-right: 2rem;
+        }
+
+        .contact-intro {
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            line-height: 1.4;
+            letter-spacing: -0.02em;
+            font-weight: 400;
+            margin-bottom: 3rem;
+        }
+
+        .contact-methods {
+            margin: 3rem 0;
+        }
+
+        .contact-method {
+            padding: 2rem 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .contact-method:last-child {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .method-label {
+            font-size: 0.875rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .method-value {
+            font-size: 1.25rem;
+            color: #000;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .method-value:hover {
+            padding-left: 5px;
+        }
+
+        .response-time {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-left: 2px solid #000;
+        }
+
+        .response-time h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .response-time p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Right Column - Form */
+        .contact-form-section {
+            background: #fff;
+            padding: 3rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #1e293b;
+            font-size: 0.875rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
-        
+
         .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group select,
+        .form-group textarea {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            padding: 1rem;
+            border: none;
+            border-bottom: 2px solid #000;
+            background: transparent;
+            font-size: 1.1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
         }
-        
+
         .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-group select:focus,
+        .form-group textarea:focus {
             outline: none;
-            border-color: #2563eb;
+            border-bottom-color: #666;
+            padding-left: 5px;
         }
-        
-        .contact-info {
-            background: #f8fafc;
-            padding: 3rem;
-            border-radius: 12px;
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #ccc;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .required {
+            color: #ff0000;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .submit-button {
+            background: #000;
+            color: #fff;
+            padding: 1rem 3rem;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .form-note {
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            color: #999;
+            line-height: 1.6;
+        }
+
+        /* Legal Effects */
+        .redacted {
+            position: relative;
+            background: #000;
+            color: transparent;
+            padding: 0 0.1em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .redacted:hover {
+            background: transparent;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: linear-gradient(to bottom, transparent 60%, #ffeb3b 60%);
+            padding: 0 0.1em;
+        }
+
+        .strike {
+            text-decoration: line-through;
+            text-decoration-color: #ff0000;
+            color: #999;
+        }
+
+        /* Office Locations */
+        .offices {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .offices h3 {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .office-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .office {
+            font-size: 0.95rem;
+        }
+
+        .office-city {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .office-address {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            margin-top: 6rem;
+            padding-top: 3rem;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #000;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            padding: 2rem;
+            background: #f0fff4;
+            border: 1px solid #00aa00;
+            margin-bottom: 2rem;
             text-align: center;
         }
-        
-        .contact-info h3 {
-            color: #2563eb;
-            margin-bottom: 1rem;
+
+        .success-message.show {
+            display: block;
         }
-        
-        .contact-info p {
-            margin-bottom: 0.5rem;
-            color: #64748b;
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+            
+            .contact-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .contact-form-section {
+                padding: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .office-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bottom-nav {
+                flex-direction: column;
+                gap: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <a href="/" class="logo">Yieldly</a>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/solutions">Solutions</a></li>
-                <li><a href="/blog/">Blog</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-            <a href="#demo" class="cta-nav">Try Demo</a>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Get in Touch</h1>
-            <p class="subtitle">Ready to transform your legal firm's cash flow? Contact us to schedule a consultation or request a demo.</p>
-        </div>
-    </section>
-
-    <!-- Contact Content -->
-    <section class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Let's Discuss Your Legal Firm's Needs</h2>
-                <p>Our team of legal technology experts is ready to help you optimise your practice's financial operations.</p>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">YieldlyCF</a>
+            <div class="header-right">
+                <div class="status">Legal Finance Experts</div>
+                <a href="/" class="cta-link">Back to Home</a>
             </div>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
-                <div class="contact-form">
-                    <h3>Send us a Message</h3>
-                    <form action="#" method="POST">
-                        <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="company">Legal Firm Name</label>
-                            <input type="text" id="company" name="company">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service">Service of Interest</label>
-                            <select id="service" name="service">
-                                <option value="">Select a service</option>
-                                <option value="cashflow">Cash Flow Management</option>
-                                <option value="billing">AI Billing Optimisation</option>
-                                <option value="compliance">SRA Compliance</option>
-                                <option value="integrations">Software Integrations</option>
-                                <option value="demo">Request Demo</option>
-                                <option value="consultation">Free Consultation</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Message *</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Tell us about your legal firm's cash flow challenges..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-                    </form>
-                </div>
-                
+        </header>
+
+        <main>
+            <div class="contact-layout">
+                <!-- Left Column - Contact Information -->
                 <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <p><strong>Email:</strong> hello@yieldly.ai</p>
-                    <p><strong>Phone:</strong> +44 800 123 4567</p>
-                    <p><strong>Address:</strong> Worcester, Worcestershire, UK</p>
-                    
-                    <h3 style="margin-top: 2rem;">Business Hours</h3>
-                    <p>Monday - Friday: 9:00 AM - 6:00 PM GMT</p>
-                    <p>Weekend: By appointment</p>
-                    
-                    <h3 style="margin-top: 2rem;">What to Expect</h3>
-                    <p>• Free 30-minute consultation</p>
-                    <p>• Custom demo of our platform</p>
-                    <p>• No-obligation assessment</p>
-                    <p>• Implementation timeline</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                    <h1 class="contact-intro">
+                        Let's discuss how we can <span class="strike">reduce</span> 
+                        <span class="highlight">eliminate</span> your lock-up in 
+                        <span class="redacted" data-text="90 days">████████</span>.
+                    </h1>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Yieldly</h3>
-                    <p>AI-powered cashflow solutions designed specifically for UK legal firms.</p>
-                    <div class="contact-info">
-                        <p>📧 hello@yieldly.ai</p>
-                        <p>📞 +44 800 123 4567</p>
-                        <p>📍 Worcester, Worcestershire</p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-label">Direct Line</div>
+                            <a href="tel:+442012345678" class="method-value">+44 20 1234 5678</a>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-label">Email</div>
+                            <a href="mailto:partners@yieldlycf.com" class="method-value">partners@yieldlycf.com</a>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-label">WhatsApp Business</div>
+                            <a href="https://wa.me/442012345678" class="method-value">+44 20 1234 5678</a>
+                        </div>
+                    </div>
+
+                    <div class="response-time">
+                        <h3>Response Commitment</h3>
+                        <p>Partners and Finance Directors: <strong>Same day response</strong></p>
+                        <p>All other enquiries: <strong>Within 24 hours</strong></p>
                     </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Solutions</h4>
-                    <ul>
-                        <li><a href="/solutions#cashflow">Cash Flow Management</a></li>
-                        <li><a href="/solutions#billing">AI Billing Optimisation</a></li>
-                        <li><a href="/solutions#compliance">SRA Compliance</a></li>
-                        <li><a href="/solutions#integrations">Software Integrations</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                        <li><a href="/privacy-policy">Privacy Policy</a></li>
-                        <li><a href="/terms-of-service">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#blog">Legal Finance Blog</a></li>
-                        <li><a href="#case-studies">Case Studies</a></li>
-                        <li><a href="#support">Help Centre</a></li>
-                        <li><a href="#api">API Documentation</a></li>
-                    </ul>
+
+                <!-- Right Column - Contact Form -->
+                <div class="contact-form-section">
+                    <h2 class="form-title">Schedule Your <span class="highlight">20-Minute Review</span></h2>
+                    
+                    <div class="success-message" id="successMessage">
+                        ✓ Thank you! We'll contact you within 24 hours.
+                    </div>
+
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="firm">Firm <span class="required">*</span></label>
+                            <input type="text" id="firm" name="firm" required placeholder="████████████">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select id="role" name="role">
+                                <option value="">Select your role</option>
+                                <option value="Managing Partner">Managing Partner</option>
+                                <option value="Senior Partner">Senior Partner</option>
+                                <option value="Finance Director">Finance Director</option>
+                                <option value="CFO">CFO</option>
+                                <option value="COO">COO</option>
+                                <option value="Head of Finance">Head of Finance</option>
+                                <option value="IT Director">IT Director</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="firmSize">Firm Size</label>
+                            <select id="firmSize" name="firmSize">
+                                <option value="">Select firm size</option>
+                                <option value="1-50">1-50 fee earners</option>
+                                <option value="51-200">51-200 fee earners</option>
+                                <option value="201-500">201-500 fee earners</option>
+                                <option value="500+">500+ fee earners</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="currentDSO">Current DSO (days)</label>
+                            <input type="number" id="currentDSO" name="currentDSO" placeholder="e.g. 185">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">How can we help?</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your cash flow challenges..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-button">Book Review →</button>
+                        
+                        <p class="form-note">
+                            By submitting this form, you agree to our privacy policy. 
+                            We will never share your information with third parties.
+                        </p>
+                    </form>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Yieldly. All rights reserved. | Designed for UK Legal Firms</p>
+
+            <!-- Office Locations -->
+            <div class="offices">
+                <h3>Our Offices</h3>
+                <div class="office-grid">
+                    <div class="office">
+                        <div class="office-city">London</div>
+                        <div class="office-address">
+                            100 Cheapside<br>
+                            London EC2V 6DT<br>
+                            United Kingdom
+                        </div>
+                    </div>
+                    
+                    <div class="office">
+                        <div class="office-city">Manchester</div>
+                        <div class="office-address">
+                            Spinningfields<br>
+                            Manchester M3 3EB<br>
+                            United Kingdom
+                        </div>
+                    </div>
+                    
+                    <div class="office">
+                        <div class="office-city">Edinburgh</div>
+                        <div class="office-address">
+                            Charlotte Square<br>
+                            Edinburgh EH2 4DR<br>
+                            United Kingdom
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="bottom-nav">
+            <div class="nav-links">
+                <a href="/services.html">Services</a>
+                <a href="/about.html">About</a>
+                <a href="/demo.html">Demo</a>
+                <a href="/blog/">Resources</a>
             </div>
         </div>
-    </footer>
+    </div>
+
+    <script>
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Log the lead (in production, send to your backend)
+            console.log('New contact form submission:', data);
+            
+            // Show success message
+            document.getElementById('successMessage').classList.add('show');
+            
+            // Reset form
+            event.target.reset();
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.remove('show');
+            }, 5000);
+            
+            // In production, you would send this to your backend:
+            // fetch('/api/contact', { method: 'POST', body: JSON.stringify(data) })
+        }
+
+        // Redacted effect
+        document.querySelectorAll('.redacted').forEach(el => {
+            const text = el.getAttribute('data-text');
+            el.setAttribute('data-text', text);
+        });
+    </script>
 </body>
-</html> 
+</html>
