@@ -119,6 +119,66 @@
             opacity: 0.6;
         }
 
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: #000000;
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 999;
+            padding: 5rem 2rem 2rem;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mobile-menu-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-menu-links a {
+            font-family: 'Lato', sans-serif;
+            color: #000000;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
         /* Glass Morphism Buttons */
         .glass-button {
             position: relative;
@@ -441,9 +501,30 @@
         
         /* Responsive - Mobile */
         @media (max-width: 480px) {
-            /* Hide navigation text, show only essential items */
+            /* Show mobile menu button */
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            /* Hide desktop navigation */
+            .nav-links {
+                display: none;
+            }
+            
+            /* Simplify header */
             header {
                 padding: 1rem 0;
+                position: fixed;
+                top: 0;
+                transform: translateY(0) !important;
+            }
+            
+            header.hidden {
+                transform: translateY(0) !important;
             }
             
             nav {
@@ -454,47 +535,34 @@
                 font-size: 1.25rem;
             }
             
-            .nav-links {
-                gap: 0.25rem;
-            }
-            
-            .nav-links li:not(:last-child):not(:nth-last-child(2)) {
-                display: none; /* Hide all except CTAs */
-            }
-            
+            /* Adjust hero for mobile with header space */
             .hero-content {
-                padding: 1rem;
+                padding: 4rem 1rem 1rem;
                 justify-content: center;
             }
             
             .hero-content h1 {
-                font-size: 1.5rem;
+                font-size: 1.75rem;
                 line-height: 1.3;
                 margin-bottom: 1rem;
             }
             
             .hero-content .subtitle {
-                font-size: 0.875rem;
-                line-height: 1.5;
+                font-size: 0.9rem;
+                line-height: 1.6;
                 margin-bottom: 1.5rem;
-            }
-            
-            .glass-button {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.65rem;
-                letter-spacing: 0.04em;
             }
             
             .supporting-badges {
                 flex-direction: column;
-                align-items: center;
-                gap: 0.5rem;
+                align-items: stretch;
+                gap: 0.75rem;
+                width: 100%;
             }
             
             .badge {
-                font-size: 0.65rem;
-                padding: 0.25rem 0.5rem;
-                width: 90%;
+                font-size: 0.75rem;
+                padding: 0.5rem;
                 text-align: center;
             }
             
@@ -504,7 +572,7 @@
             }
             
             .mission-footer p {
-                font-size: 0.875rem;
+                font-size: 0.85rem;
             }
             
             /* Modal adjustments for mobile */
@@ -539,16 +607,16 @@
         /* iPhone specific adjustments */
         @media (max-width: 390px) {
             .hero-content h1 {
-                font-size: 1.35rem;
+                font-size: 1.5rem;
             }
             
             .hero-content .subtitle {
-                font-size: 0.8rem;
+                font-size: 0.85rem;
             }
             
-            .glass-button {
-                padding: 0.4rem 0.6rem;
-                font-size: 0.6rem;
+            .badge {
+                font-size: 0.7rem;
+                padding: 0.4rem;
             }
         }
     </style>
@@ -559,6 +627,15 @@
         <header id="navbar">
             <nav>
                 <a href="/" class="logo">Yieldly</a>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Desktop Navigation -->
                 <ul class="nav-links">
                     <li><a onclick="showHome()">Home</a></li>
                     <li><a onclick="showServices()">What We Do</a></li>
@@ -571,6 +648,20 @@
                 </ul>
             </nav>
         </header>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <ul class="mobile-menu-links">
+                <li><a onclick="showHome(); toggleMobileMenu()">Home</a></li>
+                <li><a onclick="showServices(); toggleMobileMenu()">What We Do</a></li>
+                <li><a onclick="showPartners(); toggleMobileMenu()">Partners</a></li>
+                <li><a onclick="showResources(); toggleMobileMenu()">Resources</a></li>
+                <li><a onclick="showMission(); toggleMobileMenu()">Our Mission</a></li>
+                <li><a onclick="showContact(); toggleMobileMenu()">Contact</a></li>
+                <li><a onclick="showDemo(); toggleMobileMenu()" class="glass-button primary" style="display: inline-block; margin-top: 1rem;">Run the Lock Up What If</a></li>
+                <li><a onclick="showContact(); toggleMobileMenu()" class="glass-button" style="display: inline-block;">Meet our Legal SME</a></li>
+            </ul>
+        </div>
 
         <!-- Hero Content Only -->
         <div class="hero-content">
@@ -754,34 +845,54 @@
     </div>
 
     <script>
-        // Disappearing Navigation
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const btn = document.querySelector('.mobile-menu-btn');
+            menu.classList.toggle('active');
+            
+            // Animate hamburger to X
+            if (menu.classList.contains('active')) {
+                btn.children[0].style.transform = 'rotate(45deg) translateY(7px)';
+                btn.children[1].style.opacity = '0';
+                btn.children[2].style.transform = 'rotate(-45deg) translateY(-7px)';
+            } else {
+                btn.children[0].style.transform = '';
+                btn.children[1].style.opacity = '1';
+                btn.children[2].style.transform = '';
+            }
+        }
+
+        // Disappearing Navigation (Desktop only)
         let mouseY = 0;
         let hideTimeout;
 
-        document.addEventListener('mousemove', (e) => {
-            mouseY = e.clientY;
-            const navbar = document.getElementById('navbar');
-            
-            clearTimeout(hideTimeout);
-            
-            if (mouseY < 100) {
-                navbar.classList.remove('hidden');
-            } else {
-                hideTimeout = setTimeout(() => {
-                    if (mouseY > 150) {
-                        navbar.classList.add('hidden');
-                    }
-                }, 2000);
-            }
-        });
+        if (window.innerWidth > 480) {
+            document.addEventListener('mousemove', (e) => {
+                mouseY = e.clientY;
+                const navbar = document.getElementById('navbar');
+                
+                clearTimeout(hideTimeout);
+                
+                if (mouseY < 100) {
+                    navbar.classList.remove('hidden');
+                } else {
+                    hideTimeout = setTimeout(() => {
+                        if (mouseY > 150) {
+                            navbar.classList.add('hidden');
+                        }
+                    }, 2000);
+                }
+            });
 
-        // Show navbar initially
-        setTimeout(() => {
-            const navbar = document.getElementById('navbar');
-            if (mouseY > 150) {
-                navbar.classList.add('hidden');
-            }
-        }, 3000);
+            // Show navbar initially
+            setTimeout(() => {
+                const navbar = document.getElementById('navbar');
+                if (mouseY > 150) {
+                    navbar.classList.add('hidden');
+                }
+            }, 3000);
+        }
 
         // Interactive Glass Button Effect
         document.querySelectorAll('.glass-button').forEach(button => {
