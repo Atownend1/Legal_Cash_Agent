@@ -3,535 +3,757 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Cashflow Solutions for Legal Firms | Yieldly - Reduce Lock-up & Improve Cash Flow</title>
-    <meta name="description" content="Transform your legal firm's cash flow with AI-powered solutions. Reduce lock-up periods, accelerate payments, and improve financial efficiency for solicitors and law firms across the UK.">
-    <meta name="keywords" content="legal cashflow software, law firm accounting, AI billing solutions, solicitor cash flow management, legal finance automation">
-    <meta name="author" content="Yieldly">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.yieldlycf.com/">
-    <meta property="og:title" content="AI Cashflow Solutions for Legal Firms | Yieldly">
-    <meta property="og:description" content="Transform your legal firm's cash flow with AI-powered solutions. Reduce lock-up periods and improve financial efficiency.">
-    <meta property="og:image" content="https://www.yieldlycf.com/images/yieldly-og-image.jpg">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.yieldlycf.com/">
-    <meta property="twitter:title" content="AI Cashflow Solutions for Legal Firms | Yieldly">
-    <meta property="twitter:description" content="Transform your legal firm's cash flow with AI-powered solutions. Reduce lock-up periods and improve financial efficiency.">
-    <meta property="twitter:image" content="https://www.yieldlycf.com/images/yieldly-twitter-image.jpg">
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.yieldlycf.com/">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <title>Yieldly - AI-Powered Cash Flow Solutions for Legal Firms</title>
     
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap" rel="stylesheet">
     
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/styles.css">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Yieldly",
-        "description": "AI-powered cashflow solutions for legal firms",
-        "url": "https://www.yieldlycf.com/",
-        "logo": "https://www.yieldlycf.com/images/yieldly-logo.png",
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+44-800-123-4567",
-            "contactType": "customer service",
-            "email": "hello@yieldly.ai"
-        },
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Worcester",
-            "addressRegion": "Worcestershire",
-            "addressCountry": "GB"
-        }
-    }
-    </script>
+    <style>
+        /* Import Lato font */
+        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&display=swap');
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T2TK89R2R7"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-T2TK89R2R7', {
-            // Enhanced regional tracking
-            custom_map: {
-                'custom_parameter_1': 'region',
-                'custom_parameter_2': 'city',
-                'custom_parameter_3': 'language',
-                'custom_parameter_4': 'currency'
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base */
+        html, body {
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            line-height: 1.7;
+            color: #000000;
+            background: #ffffff;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Main Container */
+        .main-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Background pattern for glass effect */
+        .main-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0,0,0,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0,0,0,0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Disappearing Navigation Header */
+        header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transform: translateY(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header.hidden {
+            transform: translateY(-100%);
+        }
+
+        header:hover {
+            transform: translateY(0) !important;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.75rem;
+            font-weight: 400;
+            color: #000000;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-family: 'Lato', sans-serif;
+            color: #000000;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        /* Glass Morphism Buttons */
+        .glass-button {
+            position: relative;
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            font-size: 0.95rem;
+            padding: 0.75rem 2rem;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            color: #000000;
+        }
+
+        .glass-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.5) 0%,
+                rgba(255, 255, 255, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .glass-button:hover::before {
+            opacity: 1;
+        }
+
+        .glass-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .glass-button.primary {
+            background: rgba(0, 0, 0, 0.85);
+            color: #ffffff;
+            border-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .glass-button.primary::before {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.2) 0%,
+                rgba(255, 255, 255, 0.05) 100%);
+        }
+
+        /* Hero Content - Centered */
+        .hero-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.2;
+            color: #000000;
+            max-width: 1000px;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-content .subtitle {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: #000000;
+            max-width: 800px;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        /* Hero CTAs */
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        /* Supporting Badges */
+        .supporting-badges {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mission Statement Footer */
+        .mission-footer {
+            position: absolute;
+            bottom: 2rem;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .mission-footer p {
+            font-family: 'Lato', sans-serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #000000;
+            opacity: 0.8;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 3rem;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            width: 1200px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #000;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .close-modal:hover {
+            opacity: 1;
+        }
+
+        /* Services Content */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card h3 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            font-family: 'Lato', sans-serif;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            color: #000000;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.8);
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #000000;
+            background: #ffffff;
+        }
+
+        /* Typography for modals */
+        .modal-content h2 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .modal-content p {
+            font-family: 'Lato', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
             }
-        });
-        
-        // Track regional page views
-        gtag('event', 'page_view', {
-            'custom_parameter_1': 'midlands', // Default region
-            'custom_parameter_3': 'en-GB',   // Default language
-            'custom_parameter_4': 'GBP'      // Default currency
-        });
-    </script>
-    
-    <!-- Enhanced Analytics Tracking -->
-    <script src="js/analytics.js"></script>
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content .subtitle {
+                font-size: 1rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .glass-button {
+                padding: 0.6rem 1.5rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <a href="/" class="logo">Yieldly</a>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/solutions">Solutions</a></li>
-                <li><a href="/blog/">Blog</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-            <a href="#demo" class="cta-nav">Try Demo</a>
-        </nav>
-    </header>
+    <div class="main-container">
+        <!-- Navigation Header with CTAs -->
+        <header id="navbar">
+            <nav>
+                <a href="/" class="logo">Yieldly</a>
+                <ul class="nav-links">
+                    <li><a onclick="showHome()">Home</a></li>
+                    <li><a onclick="showServices()">What We Do</a></li>
+                    <li><a onclick="showPartners()">Partners</a></li>
+                    <li><a onclick="showResources()">Resources</a></li>
+                    <li><a onclick="showMission()">Our Mission</a></li>
+                    <li><a onclick="showContact()">Contact</a></li>
+                    <li><a onclick="showDemo()" class="glass-button primary">Run the Lock Up What If</a></li>
+                    <li><a onclick="showContact()" class="glass-button">Meet our Legal SME</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>AI-Powered Cashflow Solutions for Legal Firms</h1>
-            <p class="subtitle">Transform your legal practice with intelligent automation that reduces lock-up periods, accelerates payments, and optimises cash flow management for solicitors across the UK.</p>
-            <div class="hero-cta">
-                <a href="#demo" class="btn btn-primary">Try Free Demo</a>
-                <a href="/solutions" class="btn btn-secondary">Learn More</a>
+        <!-- Hero Content Only -->
+        <div class="hero-content">
+            <h1>We're putting £4.4 billion back into the legal sector by 2028</h1>
+            <p class="subtitle">
+                YieldlyCF combines AI, industry expertise, and best-practice process to solve the legal sector's biggest cashflow challenges — improving utilisation, reducing lock-up, and freeing working capital.
+            </p>
+            <div class="supporting-badges">
+                <span class="badge">50+ years combined experience</span>
+                <span class="badge">AI-first approach</span>
             </div>
         </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Revolutionise Your Legal Firm's Financial Management</h2>
-                <p>Our AI-driven platform addresses the critical cash flow challenges faced by modern legal practices, from client account management to automated billing optimisation.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Reduce Lock-up Periods</h3>
-                    <p>AI algorithms analyse billing patterns and client behaviour to identify opportunities for faster payment collection, reducing average lock-up by up to 40%.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🧠</div>
-                    <h3>Intelligent Cash Flow Forecasting</h3>
-                    <p>Predict future cash flow with machine learning models that consider case types, client history, and seasonal patterns specific to legal services.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>SRA Compliant Automation</h3>
-                    <p>Ensure full compliance with SRA Accounts Rules while automating client account reconciliation, COFA reporting, and trust account management.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔗</div>
-                    <h3>Seamless Integrations</h3>
-                    <p>Connect with existing legal software including Clio, Osprey, Xero, and QuickBooks for unified financial management across your practice.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📈</div>
-                    <h3>Real-Time Financial Insights</h3>
-                    <p>Dashboard analytics provide instant visibility into cash flow status, outstanding invoices, and financial performance metrics tailored for legal firms.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>Advanced Security & Privacy</h3>
-                    <p>Bank-level encryption and GDPR compliance ensure your client data and financial information remain secure and confidential at all times.</p>
-                </div>
-            </div>
+        <!-- Mission Footer -->
+        <div class="mission-footer">
+            <p>This mission takes focus. So we are all in on legal.</p>
         </div>
-    </section>
+    </div>
 
-    <!-- Benefits Section -->
-    <section class="benefits">
-        <div class="container">
-            <div class="benefits-content">
-                <div class="benefits-text">
-                    <h2>Why Leading Legal Firms Choose Yieldly</h2>
-                    <div class="benefit-item">
-                        <h3>Improve Cash Flow by 35-50%</h3>
-                        <p>Our AI identifies payment bottlenecks and automates follow-up processes, significantly reducing the time between work completion and payment receipt.</p>
-                    </div>
-                    <div class="benefit-item">
-                        <h3>Save 15+ Hours Weekly</h3>
-                        <p>Automate routine financial tasks including invoice generation, payment reminders, and account reconciliation, freeing your team to focus on billable work.</p>
-                    </div>
-                    <div class="benefit-item">
-                        <h3>Reduce Administrative Costs</h3>
-                        <p>Streamline back-office operations with intelligent automation that handles repetitive tasks while maintaining full audit trails for compliance.</p>
-                    </div>
+    <!-- Services Modal -->
+    <div id="servicesModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('servicesModal')">&times;</button>
+            <h2>What We Do</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Yieldly Cash Flow Platform</h3>
+                    <p>Our flagship AI-powered platform for comprehensive cash flow management. Reduce lock-up periods by up to 40% and improve working capital efficiency.</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li>Automated invoice tracking</li>
+                        <li>Predictive cash flow analytics</li>
+                        <li>Client payment behavior analysis</li>
+                        <li>Integrated compliance monitoring</li>
+                    </ul>
                 </div>
-                <div class="benefits-stats">
-                    <div class="stat">
-                        <div class="stat-number">40%</div>
-                        <div class="stat-label">Faster Payment Collection</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">£150k+</div>
-                        <div class="stat-label">Average Annual Savings</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-label">Client Satisfaction Rate</div>
-                    </div>
+                <div class="service-card">
+                    <h3>InTappCF</h3>
+                    <p>Intelligent client intake and matter management. Streamline onboarding while ensuring compliance and profitability from day one.</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li>Smart conflict checking</li>
+                        <li>Automated AML/KYC compliance</li>
+                        <li>Matter profitability forecasting</li>
+                        <li>Resource allocation optimization</li>
+                    </ul>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Demo Section -->
-    <section class="demo-section" id="demo">
-        <div class="container">
-            <div class="demo-content">
-                <div class="demo-text">
-                    <h2>Experience Yieldly in Action</h2>
-                    <p>Try our AI-powered cash flow analysis tool. Simply upload your financial data and see how our intelligent system identifies opportunities to improve your firm's cash flow.</p>
-                    <div class="demo-features">
-                        <div class="demo-feature">
-                            <span class="demo-icon">🔍</span>
-                            <span>Instant AI Analysis</span>
-                        </div>
-                        <div class="demo-feature">
-                            <span class="demo-icon">📊</span>
-                            <span>Detailed Reports</span>
-                        </div>
-                        <div class="demo-feature">
-                            <span class="demo-icon">⚡</span>
-                            <span>Real-time Results</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="demo-form-container">
-                    <div class="demo-form-card">
-                        <h3>Access Your Free Demo</h3>
-                        <p>Enter your details to unlock the demo and receive personalised insights for your legal firm.</p>
-                        
-                        <form id="demoForm" class="demo-form">
-                            <div class="form-group">
-                                <label for="demoName">Full Name *</label>
-                                <input type="text" id="demoName" name="name" required placeholder="Enter your full name">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="demoEmail">Email Address *</label>
-                                <input type="email" id="demoEmail" name="email" required placeholder="Enter your email address">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="demoCompany">Company Name</label>
-                                <input type="text" id="demoCompany" name="company" placeholder="Your law firm name">
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary btn-large demo-submit">
-                                <span class="btn-text">Access Demo</span>
-                                <span class="btn-loading" style="display: none;">Processing...</span>
-                            </button>
-                        </form>
-                        
-                        <div class="demo-note">
-                            <p>🔒 Your data is secure and will only be used for demo purposes</p>
-                            <p>📧 You'll receive a personalised report via email</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Demo Modal -->
-    <div id="demoModal" class="demo-modal">
-        <div class="demo-modal-content">
-            <div class="demo-modal-header">
-                <h2>Yieldly AI Cash Flow Analysis</h2>
-                <button class="demo-modal-close" onclick="closeDemoModal()">&times;</button>
-            </div>
-            <div class="demo-modal-body">
-                <div class="demo-upload-section">
-                    <h3>Upload Your Financial Data</h3>
-                    <p>For the best analysis, please upload your firm's financial data (CSV, Excel, or PDF format).</p>
-                    
-                    <div class="upload-area" id="uploadArea">
-                        <div class="upload-icon">📁</div>
-                        <p>Drag and drop files here or click to browse</p>
-                        <input type="file" id="fileInput" accept=".csv,.xlsx,.xls,.pdf" multiple>
-                    </div>
-                    
-                    <div class="uploaded-files" id="uploadedFiles"></div>
-                </div>
-                
-                <div class="demo-analysis-section" id="analysisSection" style="display: none;">
-                    <h3>AI Analysis Results</h3>
-                    <div class="analysis-loading">
-                        <div class="loading-spinner"></div>
-                        <p>Analysing your financial data...</p>
-                    </div>
-                    <div class="analysis-results" id="analysisResults"></div>
+                <div class="service-card">
+                    <h3>AMG Advisory</h3>
+                    <p>Strategic financial consulting for legal practices. Our expert team brings decades of experience to transform your firm's operations.</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                        <li>Financial process optimization</li>
+                        <li>Technology implementation</li>
+                        <li>Change management consulting</li>
+                        <li>Performance benchmarking</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Yieldly</h3>
-                    <p>AI-powered cashflow solutions designed specifically for UK legal firms.</p>
-                    <div class="contact-info">
-                        <p>📧 hello@yieldly.ai</p>
-                        <p>📞 +44 800 123 4567</p>
-                        <p>📍 Worcester, Worcestershire</p>
-                    </div>
+    <!-- Partners Modal -->
+    <div id="partnersModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('partnersModal')">&times;</button>
+            <h2>Our Partners</h2>
+            <p>We work with leading legal technology providers and professional services firms to deliver comprehensive solutions.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Technology Partners</h3>
+                    <p>Integration with major practice management systems including iManage, NetDocuments, and Elite 3E.</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Solutions</h4>
-                    <ul>
-                        <li><a href="/solutions#cashflow">Cash Flow Management</a></li>
-                        <li><a href="/solutions#billing">AI Billing Optimisation</a></li>
-                        <li><a href="/solutions#compliance">SRA Compliance</a></li>
-                        <li><a href="/solutions#integrations">Software Integrations</a></li>
-                    </ul>
+                <div class="service-card">
+                    <h3>Professional Services</h3>
+                    <p>Collaboration with Big Four accounting firms and specialist legal consultancies.</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                        <li><a href="/privacy-policy">Privacy Policy</a></li>
-                        <li><a href="/terms-of-service">Terms of Service</a></li>
-                    </ul>
+                <div class="service-card">
+                    <h3>Financial Institutions</h3>
+                    <p>Strategic relationships with leading banks and alternative finance providers.</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#blog">Legal Finance Blog</a></li>
-                        <li><a href="#case-studies">Case Studies</a></li>
-                        <li><a href="#support">Help Centre</a></li>
-                        <li><a href="#api">API Documentation</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Yieldly. All rights reserved. | Designed for UK Legal Firms</p>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <!-- JavaScript -->
+    <!-- Resources Modal -->
+    <div id="resourcesModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('resourcesModal')">&times;</button>
+            <h2>Resources</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Whitepapers</h3>
+                    <p>In-depth research on cash flow optimization, lock-up reduction strategies, and financial best practices for legal firms.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Case Studies</h3>
+                    <p>Real-world success stories from UK law firms that have transformed their financial operations with Yieldly.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Webinars</h3>
+                    <p>Monthly educational sessions on financial management, regulatory compliance, and technology adoption.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mission Modal -->
+    <div id="missionModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('missionModal')">&times;</button>
+            <h2>Our Mission</h2>
+            <p style="font-size: 1.25rem; text-align: center; margin: 2rem 0;">
+                We believe the legal sector deserves better than outdated financial processes and month-long payment cycles. Our mission is to revolutionize how law firms manage cash flow, putting £4.4 billion back into the sector by 2028.
+            </p>
+            <p style="text-align: center;">
+                Every day, brilliant legal minds lose hours to financial administration. Every month, firms struggle with cash flow despite completed work. Every year, billions sit locked in inefficient processes.
+            </p>
+            <p style="text-align: center; font-style: italic; margin-top: 2rem;">
+                This mission takes focus. So we are all in on legal.
+            </p>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('contactModal')">&times;</button>
+            <h2>Meet Our Legal SME</h2>
+            <p style="text-align: center;">Connect with our subject matter experts who understand the unique challenges of legal finance.</p>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="firm">Firm</label>
+                    <input type="text" id="firm" name="firm" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="message">How can we help?</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                </div>
+                <div style="text-align: center;">
+                    <button type="submit" class="glass-button primary">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Demo Modal -->
+    <div id="demoModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('demoModal')">&times;</button>
+            <h2>Lock Up What If Analysis</h2>
+            <p style="text-align: center;">Upload your financial data to receive an instant analysis of your lock-up periods and potential savings.</p>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="demo-email">Email</label>
+                    <input type="email" id="demo-email" name="demo-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="file">Upload Financial Data (CSV/Excel)</label>
+                    <input type="file" id="file" name="file" accept=".csv,.xlsx,.xls" style="padding: 0.5rem;">
+                </div>
+                <div style="text-align: center; display: flex; gap: 1rem; justify-content: center;">
+                    <button type="submit" class="glass-button primary">Run Analysis</button>
+                    <button type="button" class="glass-button" onclick="generateSample()">Use Sample Data</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // Demo form handling
-        document.getElementById('demoForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Disappearing Navigation
+        let mouseY = 0;
+        let hideTimeout;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseY = e.clientY;
+            const navbar = document.getElementById('navbar');
             
-            const name = document.getElementById('demoName').value;
-            const email = document.getElementById('demoEmail').value;
-            const company = document.getElementById('demoCompany').value;
+            clearTimeout(hideTimeout);
             
-            if (!name || !email) {
-                alert('Please fill in all required fields.');
-                return;
+            if (mouseY < 100) {
+                navbar.classList.remove('hidden');
+            } else {
+                hideTimeout = setTimeout(() => {
+                    if (mouseY > 150) {
+                        navbar.classList.add('hidden');
+                    }
+                }, 2000);
             }
-            
-            // Show loading state
-            const submitBtn = document.querySelector('.demo-submit');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const btnLoading = submitBtn.querySelector('.btn-loading');
-            
-            btnText.style.display = 'none';
-            btnLoading.style.display = 'inline';
-            submitBtn.disabled = true;
-            
-            // Simulate demo submission (in production, this would send to Zapier webhook)
-            setTimeout(() => {
-                // Store user info
-                localStorage.setItem('demoUser', JSON.stringify({
-                    name: name,
-                    email: email,
-                    company: company
-                }));
+        });
+
+        // Show navbar initially
+        setTimeout(() => {
+            const navbar = document.getElementById('navbar');
+            if (mouseY > 150) {
+                navbar.classList.add('hidden');
+            }
+        }, 3000);
+
+        // Interactive Glass Button Effect
+        document.querySelectorAll('.glass-button').forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
                 
-                // Show success message
-                alert('Demo access granted! Check your email for personalised insights.');
-                
-                // Show demo modal
-                document.getElementById('demoModal').style.display = 'block';
-                document.body.style.overflow = 'hidden';
-                
-                // Reset form
-                btnText.style.display = 'inline';
-                btnLoading.style.display = 'none';
-                submitBtn.disabled = false;
-                document.getElementById('demoForm').reset();
-            }, 1500);
-        });
-        
-        // File upload handling
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const uploadedFiles = document.getElementById('uploadedFiles');
-        
-        uploadArea.addEventListener('click', () => fileInput.click());
-        
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.style.borderColor = '#60a5fa';
-            uploadArea.style.background = 'rgba(96, 165, 250, 0.1)';
-        });
-        
-        uploadArea.addEventListener('dragleave', (e) => {
-            e.preventDefault();
-            uploadArea.style.borderColor = 'rgba(96, 165, 250, 0.3)';
-            uploadArea.style.background = 'transparent';
-        });
-        
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.style.borderColor = 'rgba(96, 165, 250, 0.3)';
-            uploadArea.style.background = 'transparent';
-            
-            const files = e.dataTransfer.files;
-            handleFiles(files);
-        });
-        
-        fileInput.addEventListener('change', (e) => {
-            handleFiles(e.target.files);
-        });
-        
-        function handleFiles(files) {
-            Array.from(files).forEach(file => {
-                const fileElement = document.createElement('div');
-                fileElement.className = 'uploaded-file';
-                fileElement.innerHTML = `
-                    <span class="uploaded-file-name">${file.name}</span>
-                    <span class="uploaded-file-size">${formatFileSize(file.size)}</span>
+                button.style.background = `
+                    radial-gradient(circle at ${x}px ${y}px, 
+                        rgba(255, 255, 255, 0.9) 0%, 
+                        rgba(255, 255, 255, 0.7) 40%,
+                        rgba(255, 255, 255, 0.6) 100%)
                 `;
-                uploadedFiles.appendChild(fileElement);
-            });
-            
-            // Show analysis section after files are uploaded
-            setTimeout(() => {
-                document.getElementById('analysisSection').style.display = 'block';
-                startAnalysis();
-            }, 1000);
-        }
-        
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-        
-        function startAnalysis() {
-            const analysisResults = document.getElementById('analysisResults');
-            const loadingSection = document.querySelector('.analysis-loading');
-            
-            // Get stored analysis from API
-            const storedAnalysis = localStorage.getItem('demoAnalysis');
-            
-            setTimeout(() => {
-                loadingSection.style.display = 'none';
                 
-                if (storedAnalysis) {
-                    // Use real analysis from API
-                    analysisResults.innerHTML = `
-                        <div style="color: #ffffff; margin-bottom: 1rem;">
-                            <h4 style="color: #60a5fa; margin-bottom: 0.5rem;">AI Analysis Complete</h4>
-                            <p style="color: #94a3b8; line-height: 1.6;">
-                                Based on your financial data, here are your personalised insights:
-                            </p>
-                        </div>
-                        <div style="background: rgba(96, 165, 250, 0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                            <pre style="color: #94a3b8; white-space: pre-wrap; font-family: inherit; margin: 0; line-height: 1.6;">${storedAnalysis}</pre>
-                        </div>
-                        <div style="background: rgba(96, 165, 250, 0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                            <h5 style="color: #60a5fa; margin-bottom: 0.5rem;">Next Steps</h5>
-                            <ul style="color: #94a3b8; margin: 0; padding-left: 1.5rem;">
-                                <li>Check your email for detailed insights</li>
-                                <li>Schedule a free consultation</li>
-                                <li>Start your 30-day free trial</li>
-                            </ul>
-                        </div>
-                        <div style="text-align: center; margin-top: 2rem;">
-                            <button onclick="scheduleConsultation()" style="background: linear-gradient(135deg, #60a5fa, #3b82f6); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-weight: 600; cursor: pointer;">
-                                Schedule Free Consultation
-                            </button>
-                        </div>
-                    `;
-                } else {
-                    // Fallback to demo analysis
-                    analysisResults.innerHTML = `
-                        <div style="color: #ffffff; margin-bottom: 1rem;">
-                            <h4 style="color: #60a5fa; margin-bottom: 0.5rem;">AI Analysis Complete</h4>
-                            <p style="color: #94a3b8; line-height: 1.6;">
-                                Based on your financial data, here are the key insights and recommendations:
-                            </p>
-                        </div>
-                        <div style="background: rgba(96, 165, 250, 0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                            <h5 style="color: #60a5fa; margin-bottom: 0.5rem;">Cash Flow Opportunities</h5>
-                            <ul style="color: #94a3b8; margin: 0; padding-left: 1.5rem;">
-                                <li>Potential 35% improvement in payment collection speed</li>
-                                <li>£45,000+ in recoverable outstanding invoices</li>
-                                <li>15 hours weekly time savings through automation</li>
-                            </ul>
-                        </div>
-                        <div style="background: rgba(96, 165, 250, 0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
-                            <h5 style="color: #60a5fa; margin-bottom: 0.5rem;">Recommended Actions</h5>
-                            <ul style="color: #94a3b8; margin: 0; padding-left: 1.5rem;">
-                                <li>Implement automated payment reminders</li>
-                                <li>Optimise billing cycle timing</li>
-                                <li>Set up recurring invoice generation</li>
-                            </ul>
-                        </div>
-                        <div style="text-align: center; margin-top: 2rem;">
-                            <button onclick="scheduleConsultation()" style="background: linear-gradient(135deg, #60a5fa, #3b82f6); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-weight: 600; cursor: pointer;">
-                                Schedule Free Consultation
-                            </button>
-                        </div>
+                if (button.classList.contains('primary')) {
+                    button.style.background = `
+                        radial-gradient(circle at ${x}px ${y}px, 
+                            rgba(0, 0, 0, 0.95) 0%, 
+                            rgba(0, 0, 0, 0.85) 40%,
+                            rgba(0, 0, 0, 0.8) 100%)
                     `;
                 }
-            }, 3000);
-        }
-        
-        function closeDemoModal() {
-            document.getElementById('demoModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
+            });
             
-            // Clear uploaded files
-            uploadedFiles.innerHTML = '';
-            document.getElementById('analysisSection').style.display = 'none';
-            document.querySelector('.analysis-loading').style.display = 'block';
+            button.addEventListener('mouseleave', () => {
+                if (button.classList.contains('primary')) {
+                    button.style.background = 'rgba(0, 0, 0, 0.85)';
+                } else {
+                    button.style.background = 'rgba(255, 255, 255, 0.7)';
+                }
+            });
+        });
+
+        // Modal Functions
+        function showHome() {
+            closeAllModals();
         }
-        
-        function scheduleConsultation() {
-            alert('Thank you! A member of our team will contact you within 24 hours to schedule your free consultation.');
-            closeDemoModal();
+
+        function showServices() {
+            closeAllModals();
+            document.getElementById('servicesModal').classList.add('active');
         }
-        
-        // Close modal when clicking outside
-        document.getElementById('demoModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeDemoModal();
+
+        function showPartners() {
+            closeAllModals();
+            document.getElementById('partnersModal').classList.add('active');
+        }
+
+        function showResources() {
+            closeAllModals();
+            document.getElementById('resourcesModal').classList.add('active');
+        }
+
+        function showMission() {
+            closeAllModals();
+            document.getElementById('missionModal').classList.add('active');
+        }
+
+        function showContact() {
+            closeAllModals();
+            document.getElementById('contactModal').classList.add('active');
+        }
+
+        function showDemo() {
+            closeAllModals();
+            document.getElementById('demoModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function closeAllModals() {
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.classList.remove('active');
+            });
+        }
+
+        function generateSample() {
+            alert('Sample data will be generated for analysis. This feature will create a typical legal firm dataset for demonstration purposes.');
+        }
+
+        // Close modals on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeAllModals();
             }
+        });
+
+        // Close modals on background click
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
         });
     </script>
 </body>
-</html> 
+</html>
+
+ 
