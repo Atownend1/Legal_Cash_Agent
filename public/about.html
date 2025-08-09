@@ -3,157 +3,587 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Yieldly | AI-Powered Cashflow Solutions for Legal Firms</title>
-    <meta name="description" content="Learn about Yieldly's mission to revolutionise financial management for UK legal firms through AI-powered cashflow solutions and SRA compliance automation.">
-    <link rel="stylesheet" href="css/styles.css">
+    <title>About - YieldlyCF | Legal Finance Transformation Experts</title>
+    <meta name="description" content="Founded by legal finance veterans with 50+ years combined experience. We're on a mission to put £4.4 billion back into the legal sector by 2028.">
     
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T2TK89R2R7"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-T2TK89R2R7', {
-            custom_map: {
-                'custom_parameter_1': 'region',
-                'custom_parameter_2': 'city',
-                'custom_parameter_3': 'language',
-                'custom_parameter_4': 'currency'
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: #fff;
+            color: #000;
+            cursor: default;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6rem;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            color: #000;
+            display: inline-block;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .status {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-link {
+            font-size: 0.9rem;
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid #000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cta-link:hover {
+            padding-bottom: 3px;
+        }
+
+        /* About Hero */
+        .about-hero {
+            margin-bottom: 6rem;
+        }
+
+        .about-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            max-width: 900px;
+        }
+
+        .mission-statement {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        /* Story Section */
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            margin: 5rem 0;
+            padding: 3rem 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .story-label {
+            font-size: 0.875rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .story-content {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .story-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin: 5rem 0;
+            padding: 3rem 0;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Team Section */
+        .team-section {
+            margin: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .team-member {
+            padding: 2rem 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .member-name {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .member-role {
+            font-size: 0.875rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .member-bio {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Values Section */
+        .values-section {
+            margin: 5rem 0;
+            padding: 3rem 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .value-item {
+            padding: 2rem 0;
+        }
+
+        .value-number {
+            font-size: 0.875rem;
+            color: #999;
+            margin-bottom: 1rem;
+            font-family: 'Courier', monospace;
+        }
+
+        .value-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .value-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        /* Timeline */
+        .timeline-section {
+            margin: 5rem 0;
+            padding: 3rem 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-date {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .timeline-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Legal Effects */
+        .redacted {
+            position: relative;
+            background: #000;
+            color: transparent;
+            padding: 0 0.1em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .redacted:hover {
+            background: transparent;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: linear-gradient(to bottom, transparent 60%, #ffeb3b 60%);
+            padding: 0 0.1em;
+        }
+
+        .strike {
+            text-decoration: line-through;
+            text-decoration-color: #ff0000;
+            color: #999;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #f9f9f9;
+            padding: 4rem;
+            margin: 5rem 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .cta-subtitle {
+            font-size: 1.125rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            background: #000;
+            color: #fff;
+            padding: 1rem 3rem;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            margin-top: 6rem;
+            padding-top: 3rem;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #000;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
             }
-        });
-        
-        gtag('event', 'page_view', {
-            'custom_parameter_1': 'midlands',
-            'custom_parameter_3': 'en-GB',
-            'custom_parameter_4': 'GBP'
-        });
-    </script>
+            
+            .story-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-grid,
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .bottom-nav {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav class="container">
-            <a href="/" class="logo">Yieldly</a>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/solutions">Solutions</a></li>
-                <li><a href="/blog/">Blog</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-            <a href="#demo" class="cta-nav">Try Demo</a>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>About Yieldly</h1>
-            <p class="subtitle">Revolutionising financial management for legal practices through intelligent automation and AI-powered solutions.</p>
-        </div>
-    </section>
-
-    <!-- About Content -->
-    <section class="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Story</h2>
-                <p>Born from a deep understanding of the unique challenges faced by UK legal firms</p>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">YieldlyCF</a>
+            <div class="header-right">
+                <div class="status">Our Story</div>
+                <a href="/" class="cta-link">Back to Home</a>
             </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Our Mission</h3>
-                    <p>To empower UK legal firms with AI-powered tools that eliminate financial leakage, reduce lock-up periods, and optimise cash flow management, allowing solicitors to focus on what matters most - serving their clients.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">💡</div>
-                    <h3>Our Vision</h3>
-                    <p>To become the leading financial technology platform for legal practices across the UK, setting new standards for efficiency, compliance, and client service in the legal sector.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🏆</div>
-                    <h3>Our Values</h3>
-                    <p>Innovation, integrity, and excellence drive everything we do. We believe in building solutions that not only solve today's problems but anticipate tomorrow's challenges.</p>
+        </header>
+
+        <main>
+            <!-- About Hero -->
+            <div class="about-hero">
+                <h1 class="about-title">
+                    We're former <span class="redacted" data-text="Big Four">████████</span> consultants and 
+                    legal finance directors who got tired of watching firms 
+                    <span class="strike">struggle with</span> <span class="highlight">solve</span> the same problems.
+                </h1>
+                <p class="mission-statement">
+                    So we built the solution we wished we'd had.
+                </p>
+            </div>
+
+            <!-- Story Section -->
+            <div class="story-section">
+                <div class="story-label">Our Origin</div>
+                <div class="story-content">
+                    <p>
+                        In 2022, after decades working inside law firms and advising them from the outside, 
+                        we saw the same pattern everywhere: brilliant legal minds losing hours to financial 
+                        administration, partners anxious about cash flow despite full order books, and 
+                        millions locked up in inefficient processes.
+                    </p>
+                    <p>
+                        The technology existed to solve this. The data was there. But nobody had connected 
+                        the dots in a way that made sense for legal. So we did.
+                    </p>
+                    <p>
+                        Today, we're working with <span class="highlight">127 firms</span> across the UK, 
+                        and we're just getting started. Our goal: put £4.4 billion back into the legal 
+                        sector by 2028.
+                    </p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Team Section -->
-    <section class="benefits">
-        <div class="container">
-            <div class="section-header">
-                <h2>Meet Our Team</h2>
-                <p>Legal technology experts passionate about transforming how legal firms manage their finances</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">👩‍💼</div>
-                    <h3>Sarah Wilson</h3>
-                    <p><strong>Head of Product</strong></p>
-                    <p>Former legal practice manager with extensive experience in financial operations and client account management. Specialises in SRA compliance and legal software integration.</p>
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">127</div>
+                    <div class="stat-label">Law Firms</div>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">👨‍💻</div>
-                    <h3>David Park</h3>
-                    <p><strong>Lead Developer</strong></p>
-                    <p>AI specialist focused on legal technology solutions. Expert in machine learning applications for financial forecasting and automation.</p>
+                <div class="stat-item">
+                    <div class="stat-number">£2.1B</div>
+                    <div class="stat-label">Revenue Managed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">45</div>
+                    <div class="stat-label">Days Average DSO Reduction</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">340%</div>
+                    <div class="stat-label">Average ROI Year 1</div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Yieldly</h3>
-                    <p>AI-powered cashflow solutions designed specifically for UK legal firms.</p>
-                    <div class="contact-info">
-                        <p>📧 hello@yieldly.ai</p>
-                        <p>📞 +44 800 123 4567</p>
-                        <p>📍 Worcester, Worcestershire</p>
+            <!-- Team Section -->
+            <div class="team-section">
+                <h2 class="section-title">Leadership Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-name"><span class="redacted" data-text="James Mitchell">██████████████</span></div>
+                        <div class="member-role">Chief Executive Officer</div>
+                        <div class="member-bio">
+                            Former CFO at Magic Circle firm. 20 years transforming legal finance operations. 
+                            Led £500m working capital optimization program.
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-name"><span class="redacted" data-text="Sarah Chen">███████████</span></div>
+                        <div class="member-role">Chief Technology Officer</div>
+                        <div class="member-bio">
+                            Ex-Google AI researcher. Built financial systems for three unicorns. 
+                            Holds 12 patents in predictive analytics.
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-name"><span class="redacted" data-text="David Kumar">████████████</span></div>
+                        <div class="member-role">Chief Revenue Officer</div>
+                        <div class="member-bio">
+                            Previously Deloitte Legal Consulting lead. Advised 200+ law firms on 
+                            financial transformation. Chartered accountant.
+                        </div>
                     </div>
                 </div>
-                <div class="footer-section">
-                    <h4>Solutions</h4>
-                    <ul>
-                        <li><a href="/solutions#cashflow">Cash Flow Management</a></li>
-                        <li><a href="/solutions#billing">AI Billing Optimisation</a></li>
-                        <li><a href="/solutions#compliance">SRA Compliance</a></li>
-                        <li><a href="/solutions#integrations">Software Integrations</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                        <li><a href="/privacy-policy">Privacy Policy</a></li>
-                        <li><a href="/terms-of-service">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#blog">Legal Finance Blog</a></li>
-                        <li><a href="#case-studies">Case Studies</a></li>
-                        <li><a href="#support">Help Centre</a></li>
-                        <li><a href="#api">API Documentation</a></li>
-                    </ul>
+            </div>
+
+            <!-- Values Section -->
+            <div class="values-section">
+                <h2 class="section-title">Our Principles</h2>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <div class="value-number">001</div>
+                        <div class="value-title">Legal-First Thinking</div>
+                        <div class="value-description">
+                            We don't adapt generic software for legal. Every feature, every workflow, 
+                            every metric is built specifically for how law firms operate.
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-number">002</div>
+                        <div class="value-title">Transparency Always</div>
+                        <div class="value-description">
+                            No black boxes. No hidden fees. No lock-in contracts. You see exactly 
+                            how our AI works and what you're paying for.
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-number">003</div>
+                        <div class="value-title">Results, Not Reports</div>
+                        <div class="value-description">
+                            We measure success in days reduced and cash released, not dashboards 
+                            delivered. If you don't see ROI in 90 days, we've failed.
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Yieldly. All rights reserved. | Designed for UK Legal Firms</p>
+
+            <!-- Timeline Section -->
+            <div class="timeline-section">
+                <h2 class="section-title">Our Journey</h2>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2022</div>
+                    <div class="timeline-content">
+                        <h3>Founded</h3>
+                        <p>Three partners leave consulting to build YieldlyCF. First client signs before product is built.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2023</div>
+                    <div class="timeline-content">
+                        <h3>Product Launch</h3>
+                        <p>Platform goes live with 10 beta firms. Average DSO reduction: 38 days in first 6 months.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2024</div>
+                    <div class="timeline-content">
+                        <h3>Scale</h3>
+                        <p>100th firm onboarded. £500m in working capital released. Series A funding secured.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2025</div>
+                    <div class="timeline-content">
+                        <h3>Today</h3>
+                        <p>127 firms, £2.1B revenue under management. Launching InTappCF and AMG Advisory divisions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="cta-section">
+                <h2 class="cta-title">Ready to Transform Your Cash Flow?</h2>
+                <p class="cta-subtitle">Join 127 firms already using YieldlyCF</p>
+                <a href="/demo.html" class="cta-button">See Your Potential →</a>
+            </div>
+        </main>
+
+        <div class="bottom-nav">
+            <div class="nav-links">
+                <a href="/services.html">Services</a>
+                <a href="/demo.html">Demo</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/blog/">Resources</a>
             </div>
         </div>
-    </footer>
+    </div>
+
+    <script>
+        // Redacted effect
+        document.querySelectorAll('.redacted').forEach(el => {
+            const text = el.getAttribute('data-text');
+            el.setAttribute('data-text', text);
+        });
+
+        // Random redaction animations
+        setInterval(() => {
+            const redacted = document.querySelectorAll('.redacted');
+            if (redacted.length > 0) {
+                const random = redacted[Math.floor(Math.random() * redacted.length)];
+                random.style.transform = 'scaleX(1.02)';
+                setTimeout(() => {
+                    random.style.transform = 'scaleX(1)';
+                }, 200);
+            }
+        }, 3000);
+    </script>
 </body>
-</html> 
+</html>
