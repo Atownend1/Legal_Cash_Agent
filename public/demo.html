@@ -3,462 +3,660 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo - Yieldly</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Demo - Lock Up Analysis | YieldlyCF</title>
+    <meta name="description" content="Run an instant lock-up analysis. See how much working capital your firm could release in 90 days. No signup required.">
+    
     <style>
-        .demo-tool {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 800px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: #fff;
+            color: #000;
+            cursor: default;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 4rem;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            color: #000;
+            display: inline-block;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .status {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-link {
+            font-size: 0.9rem;
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid #000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cta-link:hover {
+            padding-bottom: 3px;
+        }
+
+        /* Demo Hero */
+        .demo-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .demo-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .demo-subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Demo Layout */
+        .demo-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Left Column - Input */
+        .input-section {
+            background: #fff;
+            padding: 3rem;
+            border: 1px solid #e0e0e0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-group input,
+        .form-group select {
             width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            margin: 2rem auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border: none;
+            border-bottom: 2px solid #000;
+            background: transparent;
+            font-size: 1.2rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
         }
 
-        .api-config {
-            background: rgba(168, 85, 247, 0.1);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border-left: 4px solid #a855f7;
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-bottom-color: #666;
+            padding-left: 5px;
         }
 
-        .input-group {
-            margin-bottom: 20px;
+        .form-group input::placeholder {
+            color: #ccc;
         }
 
-        textarea {
-            width: 100%;
-            min-height: 200px;
-            padding: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            font-size: 14px;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            resize: vertical;
-            transition: border-color 0.3s ease;
-            background: rgba(255, 255, 255, 0.05);
-            color: #ffffff;
+        .input-hint {
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 0.5rem;
         }
 
         .button-group {
             display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
         }
 
-        .btn-example {
-            background: rgba(6, 182, 212, 0.2);
-            color: #06b6d4;
-            border: 1px solid rgba(6, 182, 212, 0.3);
+        .btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .btn-example:hover {
-            background: rgba(6, 182, 212, 0.3);
+        .btn-primary {
+            background: #000;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .loading {
-            display: none;
+        .btn-secondary {
+            background: transparent;
+            color: #000;
+            border: 2px solid #000;
+        }
+
+        .btn-secondary:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        /* Right Column - Results */
+        .results-section {
+            background: #f9f9f9;
+            padding: 3rem;
+            border: 1px solid #e0e0e0;
+            position: relative;
+            min-height: 500px;
+        }
+
+        .results-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
             text-align: center;
-            margin: 20px 0;
         }
 
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid #a855f7;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
+        .results-content {
+            display: none;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .results-content.show {
+            display: block;
         }
 
-        .response-section {
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            border-left: 4px solid #a855f7;
+        .result-item {
+            padding: 2rem 0;
+            border-bottom: 1px solid #e0e0e0;
         }
 
-        .demo-mode {
-            background: rgba(245, 158, 11, 0.2);
-            color: #f59e0b;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border-left: 4px solid #f59e0b;
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-size: 0.875rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .result-comparison {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .old-value {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1.5rem;
+        }
+
+        .arrow {
+            color: #666;
+        }
+
+        .new-value {
+            color: #00aa00;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Legal Effects */
+        .redacted {
+            position: relative;
+            background: #000;
+            color: transparent;
+            padding: 0 0.1em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .redacted:hover {
+            background: transparent;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: linear-gradient(to bottom, transparent 60%, #ffeb3b 60%);
+            padding: 0 0.1em;
+        }
+
+        .strike {
+            text-decoration: line-through;
+            text-decoration-color: #ff0000;
+            color: #999;
+        }
+
+        /* Sample Data Banner */
+        .sample-banner {
+            background: #f0f8ff;
+            border: 1px solid #0088cc;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            display: none;
+        }
+
+        .sample-banner.show {
+            display: block;
+        }
+
+        /* Email Capture */
+        .email-capture {
+            background: #000;
+            color: #fff;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .email-capture.show {
+            display: block;
+        }
+
+        .email-capture h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .email-form input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #fff;
+            background: transparent;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .email-form input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .email-form button {
+            padding: 0.75rem 2rem;
+            background: #fff;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .email-form button:hover {
+            transform: translateX(5px);
+        }
+
+        /* Info Cards */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: #000;
+        }
+
+        .info-number {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-label {
+            font-size: 0.875rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            margin-top: 6rem;
+            padding-top: 3rem;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #000;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+            
+            .demo-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .bottom-nav {
+                flex-direction: column;
+                gap: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">Yieldly</a>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="demo.html">Demo</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">YieldlyCF</a>
+            <div class="header-right">
+                <div class="status">Lock-up Analysis Tool</div>
+                <a href="/" class="cta-link">Back to Home</a>
+            </div>
+        </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Try Our Demo</h1>
-            <p>Experience the power of AI-powered financial analysis</p>
-        </div>
-    </section>
+        <main>
+            <!-- Demo Hero -->
+            <div class="demo-hero">
+                <h1 class="demo-title">
+                    Your <span class="strike">Lock-up</span> <span class="highlight">Cash Release</span> Analysis
+                </h1>
+                <p class="demo-subtitle">
+                    See exactly how much working capital you could unlock in 
+                    <span class="redacted" data-text="90 days">████████</span>
+                </p>
+            </div>
 
-    <!-- Demo Tool -->
-    <section class="section">
-        <div class="container">
-            <div class="demo-tool">
-                <div class="api-config">
-                    <h3>🔧 API Configuration</h3>
-                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                        <label for="apiEndpoint">API Endpoint:</label>
-                        <input type="text" id="apiEndpoint" value="" placeholder="Enter your API endpoint (optional)" style="flex: 1; min-width: 200px; padding: 8px 12px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 6px; font-size: 14px; background: rgba(255, 255, 255, 0.05); color: #ffffff;">
-                        <button class="btn btn-secondary" onclick="testConnection()">Test Connection</button>
+            <!-- Sample Data Banner -->
+            <div class="sample-banner" id="sampleBanner">
+                ✓ Sample data loaded - Using typical UK law firm metrics
+            </div>
+
+            <!-- Demo Layout -->
+            <div class="demo-layout">
+                <!-- Left Column - Input -->
+                <div class="input-section">
+                    <h2 class="section-title">Your Firm's Data</h2>
+                    
+                    <form id="demoForm">
+                        <div class="form-group">
+                            <label for="firmName">Firm Name</label>
+                            <input type="text" id="firmName" placeholder="████████████">
+                            <div class="input-hint">Optional - for your report</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="revenue">Annual Revenue (£m)</label>
+                            <input type="number" id="revenue" placeholder="100" step="0.1">
+                            <div class="input-hint">Your firm's last year revenue</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="currentDSO">Current DSO (Days)</label>
+                            <input type="number" id="currentDSO" placeholder="185">
+                            <div class="input-hint">Days Sales Outstanding</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feeEarners">Number of Fee Earners</label>
+                            <input type="number" id="feeEarners" placeholder="200">
+                            <div class="input-hint">Total billable staff</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="utilisation">Current Utilisation (%)</label>
+                            <input type="number" id="utilisation" placeholder="65" min="0" max="100">
+                            <div class="input-hint">Average across the firm</div>
+                        </div>
+
+                        <div class="button-group">
+                            <button type="button" class="btn btn-primary" onclick="calculateResults()">
+                                Calculate →
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="loadSampleData()">
+                                Use Sample Data
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Right Column - Results -->
+                <div class="results-section">
+                    <h2 class="section-title">Your Potential</h2>
+                    
+                    <div class="results-placeholder" id="placeholder">
+                        Enter your data or use sample data to see your potential cash release
                     </div>
-                    <div class="demo-mode" id="demoMode" style="display: none;">
-                        <strong>Demo Mode:</strong> Using mock responses for demonstration. Set up your own backend for full functionality.
+                    
+                    <div class="results-content" id="results">
+                        <div class="result-item">
+                            <div class="result-label">Working Capital Released</div>
+                            <div class="result-value" id="capitalReleased">£0m</div>
+                        </div>
+                        
+                        <div class="result-item">
+                            <div class="result-label">DSO Reduction</div>
+                            <div class="result-comparison">
+                                <span class="old-value" id="oldDSO">185 days</span>
+                                <span class="arrow">→</span>
+                                <span class="new-value" id="newDSO">140 days</span>
+                            </div>
+                        </div>
+                        
+                        <div class="result-item">
+                            <div class="result-label">Annual Savings</div>
+                            <div class="result-value" id="annualSavings">£0k</div>
+                        </div>
+                        
+                        <div class="result-item">
+                            <div class="result-label">ROI (Year 1)</div>
+                            <div class="result-value" id="roi">0%</div>
+                        </div>
+
+                        <!-- Email Capture -->
+                        <div class="email-capture" id="emailCapture">
+                            <h3>Get Your Full Report</h3>
+                            <form class="email-form" onsubmit="sendReport(event)">
+                                <input type="email" placeholder="your.email@firm.com" required>
+                                <button type="submit">Send Report →</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-
-                <div class="input-group">
-                    <label for="dataInput">Paste your time/WIP data (JSON, CSV, or text):</label>
-                    <textarea 
-                        id="dataInput" 
-                        placeholder="Paste your legal time entries, WIP data, or billing information here...&#10;&#10;Example formats:&#10;- JSON time entries&#10;- CSV export from your practice management system&#10;- Email threads with time data&#10;- Excel export data"
-                    ></textarea>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn btn-primary" onclick="sendMessage()">
-                        🔍 Analyze Financial Leakage
-                    </button>
-                    <button class="btn btn-secondary" onclick="clearInput()">
-                        🗑️ Clear
-                    </button>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn btn-example" onclick="loadExample('time-entries')">
-                        📊 Time Entries Example
-                    </button>
-                    <button class="btn btn-example" onclick="loadExample('wip-data')">
-                        💼 WIP Data Example
-                    </button>
-                    <button class="btn btn-example" onclick="loadExample('draft-invoices')">
-                        📄 Draft Invoices Example
-                    </button>
-                </div>
-
-                <div class="loading" id="loading">
-                    <div class="spinner"></div>
-                    <p>Analyzing your data for financial leakage...</p>
-                </div>
-
-                <div class="response-section" id="responseSection" style="display: none;">
-                    <h3>📋 Analysis Results</h3>
-                    <div id="responseContent"></div>
-                    <div id="usageInfo"></div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Yieldly. All rights reserved.</p>
+            <!-- Info Cards -->
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-number">45</div>
+                    <div class="info-label">Average DSO Days Reduced</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-number">90</div>
+                    <div class="info-label">Days to First Impact</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-number">340%</div>
+                    <div class="info-label">Average Year 1 ROI</div>
+                </div>
+            </div>
+        </main>
+
+        <div class="bottom-nav">
+            <div class="nav-links">
+                <a href="/services.html">Services</a>
+                <a href="/about.html">About</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/blog/">Resources</a>
+            </div>
         </div>
-    </footer>
+    </div>
 
     <script>
-        // Demo responses for when API is not available
-        const demoResponses = {
-            'time-entries': `🕒 Missing Time:
-- Identified missing time entry for "Smith v. Johnson" on 2024-01-16
-- Sarah Wilson logged 0 hours when work was likely performed
-- Recommend follow-up to ensure accurate time recording
-
-🧾 Aged WIP:
-- No aged WIP detected in this dataset
-- All work appears to be current
-
-📄 Draft Invoices:
-- No draft invoices found in this dataset
-
-🛑 Inactive Cases with WIP:
-- No inactive matters detected
-- All cases show recent activity
-
-Token Usage: 245 total tokens (180 prompt + 65 completion)`,
+        // Load sample data
+        function loadSampleData() {
+            document.getElementById('firmName').value = 'Sample Law Firm LLP';
+            document.getElementById('revenue').value = '100';
+            document.getElementById('currentDSO').value = '185';
+            document.getElementById('feeEarners').value = '200';
+            document.getElementById('utilisation').value = '65';
             
-            'wip-data': `🕒 Missing Time:
-- No time entries provided for analysis
-
-🧾 Aged WIP:
-- "TechCorp Acquisition": £15,000 (95 days old) - HIGH RISK
-- "Old Legacy Case": £22,000 (180 days old) - CRITICAL RISK
-- Total aged WIP: £37,000 at risk of write-off
-- Recommend immediate billing review
-
-📄 Draft Invoices:
-- No draft invoices found in this dataset
-
-🛑 Inactive Cases with WIP:
-- "Old Legacy Case" shows no recent activity
-- £22,000 unbilled time at risk
-- Recommend client contact or matter closure
-
-Token Usage: 312 total tokens (200 prompt + 112 completion)`,
+            // Show sample banner
+            document.getElementById('sampleBanner').classList.add('show');
             
-            'draft-invoices': `🕒 Missing Time:
-- No time entries provided for analysis
+            // Auto-calculate
+            setTimeout(calculateResults, 500);
+        }
 
-🧾 Aged WIP:
-- No aged WIP detected in this dataset
-
-📄 Draft Invoices:
-- "Corporate Restructure": £45,000 stuck in draft for 60 days
-- "Williams Divorce": £12,500 in draft for 25 days
-- Total draft value: £57,500 awaiting approval
-- Recommend expediting approval process
-
-🛑 Inactive Cases with WIP:
-- No inactive matters detected
-
-Token Usage: 298 total tokens (185 prompt + 113 completion)`
-        };
-
-        async function sendMessage() {
-            const dataInput = document.getElementById('dataInput');
-            const loading = document.getElementById('loading');
-            const responseSection = document.getElementById('responseSection');
-            const responseContent = document.getElementById('responseContent');
-            const usageInfo = document.getElementById('usageInfo');
-            const apiEndpoint = document.getElementById('apiEndpoint').value.trim();
-
-            const data = dataInput.value.trim();
+        // Calculate results
+        function calculateResults() {
+            const revenue = parseFloat(document.getElementById('revenue').value) || 0;
+            const currentDSO = parseFloat(document.getElementById('currentDSO').value) || 0;
+            const feeEarners = parseFloat(document.getElementById('feeEarners').value) || 0;
+            const utilisation = parseFloat(document.getElementById('utilisation').value) || 0;
             
-            if (!data) {
-                alert('Please enter some data to analyze.');
-                return;
-            }
-
-            // Show loading
-            loading.style.display = 'block';
-            responseSection.style.display = 'none';
-
-            try {
-                // Check if we should use demo mode
-                if (!apiEndpoint) {
-                    // Use demo mode
-                    await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API delay
-                    
-                    // Determine which example was used
-                    let demoKey = 'time-entries';
-                    if (data.includes('workInProgress')) demoKey = 'wip-data';
-                    if (data.includes('draftInvoices')) demoKey = 'draft-invoices';
-                    
-                    responseContent.textContent = demoResponses[demoKey] || demoResponses['time-entries'];
-                    usageInfo.textContent = 'Demo Mode: Using mock response for demonstration';
-                    responseSection.style.display = 'block';
-                    return;
-                }
-
-                // Try real API
-                const response = await fetch(apiEndpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ data: data })
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    responseContent.textContent = result.response;
-                    
-                    if (result.usage) {
-                        usageInfo.textContent = `Token Usage: ${result.usage.total_tokens} total tokens (${result.usage.prompt_tokens} prompt + ${result.usage.completion_tokens} completion)`;
-                    }
-                    
-                    responseSection.style.display = 'block';
-                } else {
-                    responseContent.innerHTML = `<div class="error">Error: ${result.error}</div>`;
-                    responseSection.style.display = 'block';
-                }
-            } catch (error) {
-                // Fall back to demo mode if API fails
-                console.log('API failed, using demo mode:', error.message);
+            if (revenue && currentDSO) {
+                // Calculate new DSO (typically 25-30% reduction)
+                const newDSO = Math.round(currentDSO * 0.73);
+                const dsoDiff = currentDSO - newDSO;
                 
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                // Calculate working capital released
+                const dailyRevenue = (revenue * 1000000) / 365;
+                const capitalReleased = (dsoDiff * dailyRevenue) / 1000000;
                 
-                let demoKey = 'time-entries';
-                if (data.includes('workInProgress')) demoKey = 'wip-data';
-                if (data.includes('draftInvoices')) demoKey = 'draft-invoices';
+                // Calculate annual savings (approx 3-5% of released capital)
+                const annualSavings = capitalReleased * 0.04 * 1000;
                 
-                responseContent.textContent = demoResponses[demoKey] || demoResponses['time-entries'];
-                usageInfo.textContent = 'Demo Mode: API unavailable, using mock response';
-                responseSection.style.display = 'block';
-            } finally {
-                loading.style.display = 'none';
+                // Calculate ROI
+                const investmentCost = revenue * 0.002 * 1000; // Assume 0.2% of revenue
+                const roi = Math.round((annualSavings / investmentCost) * 100);
+                
+                // Update display
+                document.getElementById('capitalReleased').textContent = `£${capitalReleased.toFixed(1)}m`;
+                document.getElementById('oldDSO').textContent = `${currentDSO} days`;
+                document.getElementById('newDSO').textContent = `${newDSO} days`;
+                document.getElementById('annualSavings').textContent = `£${Math.round(annualSavings)}k`;
+                document.getElementById('roi').textContent = `${roi}%`;
+                
+                // Show results
+                document.getElementById('placeholder').style.display = 'none';
+                document.getElementById('results').classList.add('show');
+                document.getElementById('emailCapture').classList.add('show');
             }
         }
 
-        function clearInput() {
-            document.getElementById('dataInput').value = '';
-            document.getElementById('responseSection').style.display = 'none';
-        }
-
-        function loadExample(type) {
-            const examples = {
-                'time-entries': `{
-  "timeEntries": [
-    {
-      "matter": "Smith v. Johnson",
-      "feeEarner": "Sarah Wilson",
-      "date": "2024-01-15",
-      "hours": 2.5,
-      "description": "Client meeting and document review"
-    },
-    {
-      "matter": "Smith v. Johnson", 
-      "feeEarner": "Sarah Wilson",
-      "date": "2024-01-16",
-      "hours": 0,
-      "description": "No time logged"
-    },
-    {
-      "matter": "Brown Estate",
-      "feeEarner": "Mike Chen",
-      "date": "2024-01-15",
-      "hours": 1.0,
-      "description": "Phone call with executor"
-    }
-  ]
-}`,
-                'wip-data': `{
-  "workInProgress": [
-    {
-      "matter": "TechCorp Acquisition",
-      "feeEarner": "David Park",
-      "value": 15000,
-      "daysAged": 95,
-      "status": "In Progress"
-    },
-    {
-      "matter": "Jones Contract Review", 
-      "feeEarner": "Lisa Thompson",
-      "value": 8500,
-      "daysAged": 45,
-      "status": "In Progress"
-    },
-    {
-      "matter": "Old Legacy Case",
-      "feeEarner": "John Smith", 
-      "value": 22000,
-      "daysAged": 180,
-      "status": "Stalled"
-    }
-  ]
-}`,
-                'draft-invoices': `{
-  "draftInvoices": [
-    {
-      "matter": "Williams Divorce",
-      "feeEarner": "Emma Davis",
-      "value": 12500,
-      "daysInDraft": 25,
-      "lastActivity": "2024-01-10"
-    },
-    {
-      "matter": "Corporate Restructure",
-      "feeEarner": "Robert Kim",
-      "value": 45000,
-      "daysInDraft": 60,
-      "lastActivity": "2023-12-15"
-    },
-    {
-      "matter": "Property Sale",
-      "feeEarner": "Anna White",
-      "value": 8000,
-      "daysInDraft": 15,
-      "lastActivity": "2024-01-20"
-    }
-  ]
-}`
-            };
-
-            document.getElementById('dataInput').value = examples[type] || '';
-        }
-
-        async function testConnection() {
-            const apiEndpoint = document.getElementById('apiEndpoint').value.trim();
-            const demoMode = document.getElementById('demoMode');
+        // Send report
+        function sendReport(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input').value;
             
-            if (!apiEndpoint) {
-                demoMode.style.display = 'block';
-                alert('Demo mode enabled. Set up your own backend for full functionality.');
-                return;
-            }
-
-            try {
-                const response = await fetch(apiEndpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ data: 'test' })
-                });
-
-                if (response.ok) {
-                    demoMode.style.display = 'none';
-                    alert('✅ API connection successful!');
-                } else {
-                    throw new Error('API returned error status');
-                }
-            } catch (error) {
-                demoMode.style.display = 'block';
-                alert('⚠️ API connection failed. Demo mode enabled.');
-            }
+            // Log the lead
+            console.log('Report requested:', {
+                email: email,
+                firmName: document.getElementById('firmName').value,
+                revenue: document.getElementById('revenue').value,
+                currentDSO: document.getElementById('currentDSO').value
+            });
+            
+            // Show success
+            alert('Report sent! Check your email within 24 hours.');
+            event.target.reset();
         }
 
-        // Keyboard shortcut: Ctrl+Enter to send
-        document.getElementById('dataInput').addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.key === 'Enter') {
-                sendMessage();
-            }
+        // Redacted effect
+        document.querySelectorAll('.redacted').forEach(el => {
+            const text = el.getAttribute('data-text');
+            el.setAttribute('data-text', text);
         });
-
-        // Auto-detect if running on localhost
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            document.getElementById('demoMode').style.display = 'none';
-        } else {
-            document.getElementById('demoMode').style.display = 'block';
-        }
     </script>
 </body>
-</html> 
+</html>
