@@ -3,128 +3,410 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - Yieldly</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Services - YieldlyCF | Legal Cash Flow Solutions</title>
+    <meta name="description" content="AI-powered cash flow management, billing optimisation, and lock-up reduction for UK law firms. Transform your firm's financial operations.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: #fff;
+            color: #000;
+            cursor: default;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem;
+        }
+
+        /* Header - Same as homepage */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6rem;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            color: #000;
+            display: inline-block;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .status {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-link {
+            font-size: 0.9rem;
+            color: #000;
+            text-decoration: none;
+            border-bottom: 1px solid #000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cta-link:hover {
+            padding-bottom: 3px;
+        }
+
+        /* Main Content */
+        .services-intro {
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            line-height: 1.4;
+            letter-spacing: -0.02em;
+            font-weight: 400;
+            margin-bottom: 5rem;
+        }
+
+        /* Service Cards */
+        .services-grid {
+            display: grid;
+            gap: 4rem;
+            margin: 5rem 0;
+        }
+
+        .service-item {
+            padding: 3rem 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .service-number {
+            font-size: 0.875rem;
+            color: #999;
+            margin-bottom: 1rem;
+            font-family: 'Courier', monospace;
+        }
+
+        .service-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .service-description {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .service-features li {
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 1rem;
+            color: #666;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .service-features li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #000;
+        }
+
+        /* Legal Effects */
+        .redacted {
+            position: relative;
+            background: #000;
+            color: transparent;
+            padding: 0 0.1em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .redacted:hover {
+            background: transparent;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .redacted::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 0 0.1em;
+            color: #fff;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .redacted:hover::after {
+            opacity: 0;
+        }
+
+        .strike {
+            position: relative;
+            display: inline-block;
+            color: #999;
+            text-decoration: line-through;
+            text-decoration-color: #ff0000;
+            text-decoration-thickness: 2px;
+        }
+
+        .highlight {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(to bottom, transparent 60%, #ffeb3b 60%);
+            padding: 0 0.1em;
+        }
+
+        .grey {
+            color: #999;
+        }
+
+        .metric {
+            color: #00aa00;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        /* Links */
+        .link {
+            color: #000;
+            text-decoration: none;
+            border-bottom: 2px solid #000;
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .link:hover {
+            border-bottom-width: 4px;
+            padding-bottom: 0;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            margin-top: 8rem;
+            padding-top: 3rem;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #000;
+        }
+
+        .cta-button {
+            background: #000;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+            
+            .services-intro {
+                font-size: 1.5rem;
+            }
+            
+            .service-title {
+                font-size: 1.5rem;
+            }
+            
+            .bottom-nav {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">Yieldly</a>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="blog/">Blog</a></li>
-                <li><a href="demo.html">Demo</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">YieldlyCF</a>
+            <div class="header-right">
+                <div class="status">Legal Sector Solutions</div>
+                <a href="/" class="cta-link">Back to Home</a>
+            </div>
+        </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Our Services</h1>
-            <p>Comprehensive financial analysis tools for legal practices</p>
-        </div>
-    </section>
+        <main>
+            <div class="services-intro">
+                We <span class="strike">reduce</span> <span class="highlight">eliminate</span> the cash flow challenges 
+                that keep <span class="redacted" data-text="partners">████████</span> awake at night.
+            </div>
 
-    <!-- Services Content -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">What We Offer</h2>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
-                <div class="card">
-                    <h3>🕒 Missing Time Detection</h3>
-                    <p>Our AI analyzes your time entries to identify gaps and incomplete records that could be costing you revenue.</p>
-                    <ul style="margin-top: 1rem; padding-left: 1.5rem; color: rgba(255, 255, 255, 0.8);">
-                        <li>Pattern recognition for missing entries</li>
-                        <li>Automated follow-up recommendations</li>
-                        <li>Historical analysis and trends</li>
+            <div class="services-grid">
+                <!-- Service 1: Yieldly Cash Flow Platform -->
+                <div class="service-item">
+                    <div class="service-number">001 / PLATFORM</div>
+                    <h2 class="service-title">Yieldly Cash Flow <span class="highlight">Platform</span></h2>
+                    <p class="service-description">
+                        Our flagship AI-powered platform for comprehensive cash flow management. 
+                        Average DSO reduction: <span class="metric">45 days</span>. Working capital released: 
+                        <span class="metric">£3-15m</span> depending on firm size.
+                    </p>
+                    <ul class="service-features">
+                        <li>Real-time lock-up monitoring across all matters</li>
+                        <li>Automated intelligent payment chasing</li>
+                        <li>Partner-specific dashboards with mobile access</li>
+                        <li>Predictive analytics for payment delays</li>
+                        <li>Integration with Elite 3E, Aderant, and all major PMS</li>
                     </ul>
                 </div>
 
-                <div class="card">
-                    <h3>🧾 Aged WIP Analysis</h3>
-                    <p>Identify work-in-progress that's aging and at risk of write-off with our intelligent analysis system.</p>
-                    <ul style="margin-top: 1rem; padding-left: 1.5rem; color: rgba(255, 255, 255, 0.8);">
-                        <li>Risk assessment and scoring</li>
-                        <li>Actionable recovery strategies</li>
-                        <li>Automated billing reminders</li>
+                <!-- Service 2: InTappCF -->
+                <div class="service-item">
+                    <div class="service-number">002 / INTAKE</div>
+                    <h2 class="service-title">InTapp<span class="redacted" data-text="CF">██</span></h2>
+                    <p class="service-description">
+                        Intelligent client intake and matter management. Streamline your onboarding while ensuring 
+                        compliance and profitability from day one. <span class="strike">Manual processes</span> 
+                        <span class="highlight">Automated workflows</span>. Setup time: <span class="metric">7 days</span>.
+                    </p>
+                    <ul class="service-features">
+                        <li>Smart conflict checking across all systems</li>
+                        <li>Automated AML/KYC compliance verification</li>
+                        <li>Matter profitability forecasting at intake</li>
+                        <li>Resource allocation optimization</li>
+                        <li>Client credit checking and risk scoring</li>
+                        <li>Engagement letter automation</li>
                     </ul>
                 </div>
 
-                <div class="card">
-                    <h3>📄 Draft Invoice Tracking</h3>
-                    <p>Find invoices stuck in draft status and get them approved faster with our tracking system.</p>
-                    <ul style="margin-top: 1rem; padding-left: 1.5rem; color: rgba(255, 255, 255, 0.8);">
-                        <li>Draft invoice identification</li>
-                        <li>Approval workflow optimization</li>
-                        <li>Cash flow impact analysis</li>
+                <!-- Service 3: AMG Advisory -->
+                <div class="service-item">
+                    <div class="service-number">003 / ADVISORY</div>
+                    <h2 class="service-title"><span class="redacted" data-text="AMG">███</span> Advisory</h2>
+                    <p class="service-description">
+                        Strategic financial consulting from legal sector specialists with <span class="metric">50+ years</span> 
+                        combined experience. We don't just implement technology – we transform your entire financial operations.
+                        Typical engagement ROI: <span class="metric">340%</span>.
+                    </p>
+                    <ul class="service-features">
+                        <li>Financial process optimization and redesign</li>
+                        <li>Technology implementation and change management</li>
+                        <li>Partner compensation model design</li>
+                        <li>Working capital optimization strategies</li>
+                        <li>Pricing and profitability consulting</li>
+                        <li>Benchmarking against peer firms</li>
                     </ul>
                 </div>
 
-                <div class="card">
-                    <h3>🛑 Inactive Case Monitoring</h3>
-                    <p>Monitor cases with unbilled time that show no recent activity and need attention.</p>
-                    <ul style="margin-top: 1rem; padding-left: 1.5rem; color: rgba(255, 255, 255, 0.8);">
-                        <li>Inactive case identification</li>
-                        <li>Client contact recommendations</li>
-                        <li>Matter closure strategies</li>
+                <!-- Additional Services -->
+                <div class="service-item">
+                    <div class="service-number">004 / COMPLIANCE</div>
+                    <h2 class="service-title">SRA & Regulatory <span class="highlight">Compliance</span></h2>
+                    <p class="service-description">
+                        Built-in compliance with <span class="grey">SRA Accounts Rules</span>, automatic COFA reporting, 
+                        and complete audit trails. First-time invoice acceptance rate: <span class="metric">98%</span>.
+                    </p>
+                    <ul class="service-features">
+                        <li>Automated SRA rule checks before billing</li>
+                        <li>Client account reconciliation</li>
+                        <li>Built-in three-way matching</li>
+                        <li>Complete audit trail for every transaction</li>
                     </ul>
                 </div>
 
-                <div class="card">
-                    <h3>📊 Financial Reporting</h3>
-                    <p>Comprehensive reports and analytics to help you understand your practice's financial health.</p>
-                    <ul style="margin-top: 1rem; padding-left: 1.5rem; color: rgba(255, 255, 255, 0.8);">
-                        <li>Real-time financial dashboards</li>
-                        <li>Custom report generation</li>
-                        <li>Performance benchmarking</li>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <h3>🤖 AI-Powered Insights</h3>
-                    <p>Advanced artificial intelligence provides actionable insights and recommendations.</p>
-                    <ul style="margin-top: 1rem; padding-left: 1.5rem; color: rgba(255, 255, 255, 0.8);">
-                        <li>Predictive analytics</li>
-                        <li>Automated recommendations</li>
-                        <li>Continuous learning system</li>
+                <!-- Service 5: Integration -->
+                <div class="service-item">
+                    <div class="service-number">005 / INTEGRATION</div>
+                    <h2 class="service-title">System <span class="strike">Migration</span> Integration</h2>
+                    <p class="service-description">
+                        Works with your existing PMS - Elite 3E, Aderant, Proclaim, or any other system. 
+                        Implementation in <span class="metric">14 days</span>, not months. Zero disruption guarantee.
+                    </p>
+                    <ul class="service-features">
+                        <li>Pre-built connectors for all major PMS</li>
+                        <li>Real-time data synchronisation</li>
+                        <li>No disruption to current workflows</li>
+                        <li>Full API access for custom needs</li>
                     </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </main>
 
-    <!-- Integration Section -->
-    <section class="section" style="background: rgba(255, 255, 255, 0.02);">
-        <div class="container">
-            <h2 class="section-title">Easy Integration</h2>
-            <div class="card">
-                <h3>Works with Your Existing Systems</h3>
-                <p>Yieldly integrates seamlessly with your current practice management software:</p>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; color: rgba(255, 255, 255, 0.8);">
-                    <div>• Clio</div>
-                    <div>• PracticePanther</div>
-                    <div>• MyCase</div>
-                    <div>• TimeSolv</div>
-                    <div>• Bill4Time</div>
-                    <div>• Custom CSV/JSON</div>
-                </div>
+        <div class="bottom-nav">
+            <div class="nav-links">
+                <a href="/about.html">About</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/blog/">Resources</a>
+                <a href="/demo.html">Demo</a>
             </div>
+            <a href="/demo.html" class="cta-button">Start Analysis →</a>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Yieldly. All rights reserved.</p>
-        </div>
-    </footer>
+    <script>
+        // Redacted effect
+        document.querySelectorAll('.redacted').forEach(el => {
+            const text = el.getAttribute('data-text');
+            el.setAttribute('data-text', text);
+        });
+
+        // Random redaction animations
+        setInterval(() => {
+            const redacted = document.querySelectorAll('.redacted');
+            if (redacted.length > 0) {
+                const random = redacted[Math.floor(Math.random() * redacted.length)];
+                random.style.transform = 'scaleX(1.02)';
+                setTimeout(() => {
+                    random.style.transform = 'scaleX(1)';
+                }, 200);
+            }
+        }, 3000);
+    </script>
 </body>
-</html> 
+</html>
