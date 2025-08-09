@@ -604,7 +604,17 @@
             }
         }
         
-        /* iPhone specific adjustments */
+        /* Animation for success modal */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -45%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
         @media (max-width: 390px) {
             .hero-content h1 {
                 font-size: 1.5rem;
@@ -1048,10 +1058,92 @@ INV-2024-015,Cooper Manufacturing,M-2024-0102,10/03/2024,09/04/2024,23450.00,Pen
 
         // Run Analysis Function
         function runAnalysis(event) {
-            event.preventDefault();
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
             
             const fileInput = document.getElementById('file');
             const companyName = document.getElementById('company').value;
+            const email = document.getElementById('demo-email').value;
+            
+            // Validate inputs
+            if (!companyName || !email) {
+                alert('Please fill in Company Name and Email fields.');
+                return;
+            }
+            
+            if (!fileInput.files.length) {
+                alert('Please upload a file or use sample data first.');
+                return;
+            }
+            
+            // Get the button that was clicked
+            const submitButton = document.querySelector('#demoModal .glass-button.primary');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Analyzing...';
+            submitButton.disabled = true;
+            
+            // Simulate analysis (in production, this would send to your backend)
+            setTimeout(() => {
+                // Create analysis results
+                const analysisResults = `
+                    <div style="padding: 2rem; background: rgba(0, 255, 0, 0.05); border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 8px; margin-top: 2rem;">
+                        <h3 style="font-family: 'Times New Roman', serif; margin-bottom: 1rem;">Analysis Complete for ${companyName}</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 1.5rem;">
+                            <div>
+                                <h4 style="font-family: 'Times New Roman', serif; font-size: 1.2rem;">Current Metrics</h4>
+                                <p><strong>Total Outstanding:</strong> £210,300</p>
+                                <p><strong>Average Lock-up Period:</strong> 58 days</p>
+                                <p><strong>Overdue Invoices:</strong> 10 (67%)</p>
+                                <p><strong>Cash at Risk:</strong> £147,050</p>
+                            </div>
+                            <div>
+                                <h4 style="font-family: 'Times New Roman', serif; font-size: 1.2rem;">Potential with Yieldly</h4>
+                                <p><strong>Reduced Lock-up:</strong> 32 days (-45%)</p>
+                                <p><strong>Cash Released:</strong> £89,400</p>
+                                <p><strong>Annual Savings:</strong> £15,200</p>
+                                <p><strong>ROI:</strong> 340% Year 1</p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 0, 0, 0.05); border-radius: 4px;">
+                            <p style="font-style: italic; text-align: center; margin: 0;">
+                                "Based on your data, implementing Yieldly could release <strong>£89,400</strong> in working capital within 90 days."
+                            </p>
+                        </div>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button type="button" class="glass-button primary" onclick="showContact(); closeModal('demoModal');">Schedule a Consultation</button>
+                        </div>
+                    </div>
+                `;
+                
+                // Find the form container
+                const modalContent = document.querySelector('#demoModal .modal-content');
+                
+                // Remove any existing results
+                const existingResults = document.getElementById('analysis-results');
+                if (existingResults) {
+                    existingResults.remove();
+                }
+                
+                // Add new results
+                const resultsDiv = document.createElement('div');
+                resultsDiv.id = 'analysis-results';
+                resultsDiv.innerHTML = analysisResults;
+                modalContent.appendChild(resultsDiv);
+                
+                // Reset button
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                
+                // Scroll to results smoothly
+                setTimeout(() => {
+                    resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }, 2000);
+            
+            return false;
+        }getElementById('company').value;
             
             if (!fileInput.files.length) {
                 alert('Please upload a file or use sample data first.');
