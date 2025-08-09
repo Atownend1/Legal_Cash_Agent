@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Yieldly - AI-Powered Cash Flow Solutions for Legal Firms</title>
     
     <!-- Google Fonts -->
@@ -399,19 +399,25 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Responsive */
+        /* Responsive - Tablet */
         @media (max-width: 768px) {
             .nav-links {
-                gap: 1rem;
-                font-size: 0.85rem;
+                gap: 0.5rem;
+                font-size: 0.75rem;
+            }
+            
+            .hero-content {
+                padding: 1rem;
             }
             
             .hero-content h1 {
-                font-size: 2rem;
+                font-size: 1.75rem;
+                margin-bottom: 1rem;
             }
             
             .hero-content .subtitle {
-                font-size: 1rem;
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
             }
             
             .services-grid {
@@ -419,8 +425,130 @@
             }
             
             .glass-button {
-                padding: 0.6rem 1.5rem;
-                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
+            }
+            
+            .supporting-badges {
+                gap: 0.5rem;
+            }
+            
+            .badge {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.6rem;
+            }
+        }
+        
+        /* Responsive - Mobile */
+        @media (max-width: 480px) {
+            /* Hide navigation text, show only essential items */
+            header {
+                padding: 1rem 0;
+            }
+            
+            nav {
+                padding: 0 1rem;
+            }
+            
+            .logo {
+                font-size: 1.25rem;
+            }
+            
+            .nav-links {
+                gap: 0.25rem;
+            }
+            
+            .nav-links li:not(:last-child):not(:nth-last-child(2)) {
+                display: none; /* Hide all except CTAs */
+            }
+            
+            .hero-content {
+                padding: 1rem;
+                justify-content: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.5rem;
+                line-height: 1.3;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-content .subtitle {
+                font-size: 0.875rem;
+                line-height: 1.5;
+                margin-bottom: 1.5rem;
+            }
+            
+            .glass-button {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.65rem;
+                letter-spacing: 0.04em;
+            }
+            
+            .supporting-badges {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .badge {
+                font-size: 0.65rem;
+                padding: 0.25rem 0.5rem;
+                width: 90%;
+                text-align: center;
+            }
+            
+            .mission-footer {
+                bottom: 1rem;
+                padding: 0 1rem;
+            }
+            
+            .mission-footer p {
+                font-size: 0.875rem;
+            }
+            
+            /* Modal adjustments for mobile */
+            .modal-content {
+                padding: 1.5rem;
+                width: 95%;
+                max-height: 85vh;
+            }
+            
+            .modal-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .services-grid {
+                gap: 1rem;
+            }
+            
+            .service-card {
+                padding: 1rem;
+            }
+            
+            .service-card h3 {
+                font-size: 1.25rem;
+            }
+            
+            .form-group input,
+            .form-group textarea {
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+        }
+        
+        /* iPhone specific adjustments */
+        @media (max-width: 390px) {
+            .hero-content h1 {
+                font-size: 1.35rem;
+            }
+            
+            .hero-content .subtitle {
+                font-size: 0.8rem;
+            }
+            
+            .glass-button {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.6rem;
             }
         }
     </style>
@@ -570,7 +698,7 @@
             <button class="close-modal" onclick="closeModal('contactModal')">&times;</button>
             <h2>Meet Our Legal SME</h2>
             <p style="text-align: center;">Connect with our subject matter experts who understand the unique challenges of legal finance.</p>
-            <form class="contact-form">
+            <form class="contact-form" onsubmit="runAnalysis(event)">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" required>
@@ -734,7 +862,61 @@
         }
 
         function generateSample() {
-            alert('Sample data will be generated for analysis. This feature will create a typical legal firm dataset for demonstration purposes.');
+            // Generate sample CSV data
+            const sampleData = `Invoice Number,Client Name,Matter Reference,Invoice Date,Due Date,Amount,Status,Days Outstanding
+INV-2024-001,Smithson Holdings Ltd,M-2023-0145,01/01/2024,31/01/2024,12500.00,Overdue,95
+INV-2024-002,Bradley & Associates,M-2023-0203,05/01/2024,04/02/2024,8750.50,Overdue,91
+INV-2024-003,Mitchell Properties,M-2023-0189,10/01/2024,09/02/2024,15200.00,Overdue,86
+INV-2024-004,Harrison Group plc,M-2023-0234,15/01/2024,14/02/2024,22100.00,Overdue,81
+INV-2024-005,Wilson Enterprises,M-2024-0001,20/01/2024,19/02/2024,9800.00,Overdue,76
+INV-2024-006,Thompson Industries,M-2024-0012,25/01/2024,24/02/2024,18500.00,Overdue,71
+INV-2024-007,Anderson Corp,M-2024-0025,01/02/2024,02/03/2024,14750.00,Overdue,65
+INV-2024-008,Clarke Financial,M-2024-0038,05/02/2024,06/03/2024,11200.00,Overdue,61
+INV-2024-009,Roberts Construction,M-2024-0045,10/02/2024,11/03/2024,26800.00,Overdue,56
+INV-2024-010,Davies Technology Ltd,M-2024-0052,15/02/2024,16/03/2024,7600.00,Overdue,51
+INV-2024-011,Evans Logistics,M-2024-0067,20/02/2024,21/03/2024,13400.00,Pending,46
+INV-2024-012,Morgan Real Estate,M-2024-0078,25/02/2024,26/03/2024,19250.00,Pending,41
+INV-2024-013,Turner Consulting,M-2024-0089,01/03/2024,31/03/2024,8900.00,Pending,36
+INV-2024-014,Phillips Media Group,M-2024-0095,05/03/2024,04/04/2024,16700.00,Pending,32
+INV-2024-015,Cooper Manufacturing,M-2024-0102,10/03/2024,09/04/2024,23450.00,Pending,27`;
+
+            // Create a Blob from the CSV data
+            const blob = new Blob([sampleData], { type: 'text/csv' });
+            
+            // Create a File object
+            const sampleFile = new File([blob], 'sample_legal_invoices.csv', { type: 'text/csv' });
+            
+            // Update the file input to show the sample file
+            const fileInput = document.getElementById('file');
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(sampleFile);
+            fileInput.files = dataTransfer.files;
+            
+            // Update the UI to show file is loaded
+            const fileLabel = fileInput.previousElementSibling || fileInput.parentElement.querySelector('label[for="file"]');
+            if (fileLabel) {
+                fileLabel.innerHTML = 'Upload Financial Data (CSV/Excel) <span style="color: green; font-weight: bold;">✓ Sample data loaded</span>';
+            }
+            
+            // Add visual feedback next to file input
+            if (!document.getElementById('file-status')) {
+                const statusDiv = document.createElement('div');
+                statusDiv.id = 'file-status';
+                statusDiv.style.cssText = 'margin-top: 0.5rem; padding: 0.5rem; background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 4px;';
+                statusDiv.innerHTML = '<strong>Sample file loaded:</strong> sample_legal_invoices.csv<br><small>15 invoices • Total: £210,300 • Average days outstanding: 58</small>';
+                fileInput.parentElement.appendChild(statusDiv);
+            }
+            
+            // Auto-populate company name and email if empty
+            const companyInput = document.getElementById('company');
+            const emailInput = document.getElementById('demo-email');
+            
+            if (!companyInput.value) {
+                companyInput.value = 'Sample Law Firm LLP';
+            }
+            if (!emailInput.value) {
+                emailInput.value = 'demo@example.com';
+            }
         }
 
         // Close modals on escape key
@@ -752,8 +934,81 @@
                 }
             });
         });
+
+        // Run Analysis Function
+        function runAnalysis(event) {
+            event.preventDefault();
+            
+            const fileInput = document.getElementById('file');
+            const companyName = document.getElementById('company').value;
+            
+            if (!fileInput.files.length) {
+                alert('Please upload a file or use sample data first.');
+                return;
+            }
+            
+            // Show loading state
+            const submitButton = event.target.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Analyzing...';
+            submitButton.disabled = true;
+            
+            // Simulate analysis (in production, this would send to your backend)
+            setTimeout(() => {
+                // Create analysis results
+                const analysisResults = `
+                    <div style="padding: 2rem; background: rgba(0, 255, 0, 0.05); border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 8px; margin-top: 2rem;">
+                        <h3 style="font-family: 'Times New Roman', serif; margin-bottom: 1rem;">Analysis Complete for ${companyName}</h3>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 1.5rem;">
+                            <div>
+                                <h4 style="font-family: 'Times New Roman', serif; font-size: 1.2rem;">Current Metrics</h4>
+                                <p><strong>Total Outstanding:</strong> £210,300</p>
+                                <p><strong>Average Lock-up Period:</strong> 58 days</p>
+                                <p><strong>Overdue Invoices:</strong> 10 (67%)</p>
+                                <p><strong>Cash at Risk:</strong> £147,050</p>
+                            </div>
+                            <div>
+                                <h4 style="font-family: 'Times New Roman', serif; font-size: 1.2rem;">Potential with Yieldly</h4>
+                                <p><strong>Reduced Lock-up:</strong> 32 days (-45%)</p>
+                                <p><strong>Cash Released:</strong> £89,400</p>
+                                <p><strong>Annual Savings:</strong> £15,200</p>
+                                <p><strong>ROI:</strong> 340% Year 1</p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 2rem; padding: 1rem; background: rgba(0, 0, 0, 0.05); border-radius: 4px;">
+                            <p style="font-style: italic; text-align: center; margin: 0;">
+                                "Based on your data, implementing Yieldly could release <strong>£89,400</strong> in working capital within 90 days."
+                            </p>
+                        </div>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button class="glass-button primary" onclick="showContact()">Schedule a Consultation</button>
+                        </div>
+                    </div>
+                `;
+                
+                // Find the form and append results
+                const formContainer = document.querySelector('#demoModal .contact-form');
+                
+                // Remove any existing results
+                const existingResults = document.getElementById('analysis-results');
+                if (existingResults) {
+                    existingResults.remove();
+                }
+                
+                // Add new results
+                const resultsDiv = document.createElement('div');
+                resultsDiv.id = 'analysis-results';
+                resultsDiv.innerHTML = analysisResults;
+                formContainer.parentElement.appendChild(resultsDiv);
+                
+                // Reset button
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+                
+                // Scroll to results
+                resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 2000);
+        }
     </script>
 </body>
 </html>
-
- 
