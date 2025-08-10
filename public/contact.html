@@ -326,10 +326,33 @@
             border: 1px solid #00aa00;
             margin-bottom: 2rem;
             text-align: center;
+            border-radius: 8px;
         }
 
         .success-message.show {
             display: block;
+        }
+
+        /* Form loading state */
+        .submit-button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Formspree success page styling */
+        .form-success {
+            text-align: center;
+            padding: 3rem;
+            background: #f0fff4;
+            border: 1px solid #00aa00;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .form-success h2 {
+            color: #00aa00;
+            margin-bottom: 1rem;
         }
 
         /* Responsive */
@@ -365,10 +388,10 @@
 <body>
     <div class="container">
         <header>
-            <a href="/" class="logo">YieldlyCF</a>
+            <a href="index.html" class="logo">YieldlyCF</a>
             <div class="header-right">
                 <div class="status">Legal Finance Experts</div>
-                <a href="/" class="cta-link">Back to Home</a>
+                <a href="index.html" class="cta-link">Back to Home</a>
             </div>
         </header>
 
@@ -410,11 +433,28 @@
                 <div class="contact-form-section">
                     <h2 class="form-title">Schedule Your <span class="highlight">20-Minute Review</span></h2>
                     
+                    <!-- Success message for Formspree redirect -->
+                    <div class="form-success" id="formSuccess" style="display: none;">
+                        <h2>✓ Thank You!</h2>
+                        <p>We've received your request and will contact you within 24 hours.</p>
+                        <p><strong>Next steps:</strong></p>
+                        <ul style="text-align: left; display: inline-block; margin: 1rem 0;">
+                            <li>Check your email for confirmation</li>
+                            <li>We'll schedule your 20-minute review</li>
+                            <li>Prepare any current financial data</li>
+                        </ul>
+                    </div>
+                    
                     <div class="success-message" id="successMessage">
                         ✓ Thank you! We'll contact you within 24 hours.
                     </div>
 
-                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                    <form id="contactForm" action="https://formspree.io/f/mqalgldy" method="POST">
+                        <!-- Honeypot protection -->
+                        <input type="text" name="_gotcha" style="display:none">
+                        <!-- Formspree redirect -->
+                        <input type="hidden" name="_next" value="contact.html?success=true">
+                        
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name <span class="required">*</span></label>
@@ -526,43 +566,35 @@
 
         <div class="bottom-nav">
             <div class="nav-links">
-                <a href="/services.html">Services</a>
-                <a href="/about.html">About</a>
-                <a href="/demo.html">Demo</a>
-                <a href="/blog/">Resources</a>
+                <a href="services.html">Services</a>
+                <a href="about.html">About</a>
+                <a href="demo.html">Demo</a>
+                <a href="blog/">Resources</a>
             </div>
         </div>
     </div>
 
     <script>
-        // Form submission
-        function handleSubmit(event) {
-            event.preventDefault();
+        // Check for success parameter in URL (Formspree redirect)
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('success') === 'true') {
+                document.getElementById('formSuccess').style.display = 'block';
+                document.getElementById('contactForm').style.display = 'none';
+                // Scroll to success message
+                document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Formspree form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            // Show loading state
+            const submitBtn = this.querySelector('.submit-button');
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
             
-            // Get form data
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData.entries());
-            
-            // Log the lead (in production, send to your backend)
-            console.log('New contact form submission:', data);
-            
-            // Show success message
-            document.getElementById('successMessage').classList.add('show');
-            
-            // Reset form
-            event.target.reset();
-            
-            // Scroll to success message
-            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
-            
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                document.getElementById('successMessage').classList.remove('show');
-            }, 5000);
-            
-            // In production, you would send this to your backend:
-            // fetch('/api/contact', { method: 'POST', body: JSON.stringify(data) })
-        }
+            // Formspree will handle the submission and redirect
+        });
 
         // Redacted effect
         document.querySelectorAll('.redacted').forEach(el => {
